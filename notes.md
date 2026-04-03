@@ -16,7 +16,7 @@
 | 2 tbsp jam (~40g) | ~28g |
 | 150g skyr | ~8g |
 | 200ml apple juice or sports drink | ~20g |
-| **Total** | **~138g (~1.9 g/kg)** ✅ |
+| **Total** | **~138g (1.9 g/kg)** ✅ |
 
 > Add the juice/sports drink to hit the 1.5–2 g/kg target — granola and skyr alone fall slightly short. Note that granola has more fibre than white oats; if your gut is sensitive before races, keep the portion to 80g max.
 
@@ -63,7 +63,7 @@
 
 ---
 
-## ~9:00am — In-Race Gel (~30 min into race)
+## ~9:00am — In-Race Gel (30 min into race)
 
 | What | Detail |
 |---|---|
