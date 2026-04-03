@@ -1,301 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Athlete Reminders</title>
+<title>Athlete Notes</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 <style>
-  :root {
+  :root[data-theme="light"] {
     --bg: #f5f5f0;
     --surface: #ffffff;
     --border: #e0e0d8;
     --text: #1a1a1a;
     --text-muted: #666;
-    --accent: #e85d04;
-    --accent-soft: #fff3ee;
+    --accent: #2d6a4f;
+    --accent-light: #e8f5ee;
+    --heading: #1a3a2a;
+    --code-bg: #f0f0eb;
+    --table-head: #e8f5ee;
+    --table-stripe: #fafaf7;
+    --toggle-bg: #2d6a4f;
+    --toggle-icon: "☀️";
     --shadow: 0 2px 12px rgba(0,0,0,0.07);
-    --radius: 12px;
-    --font: 'Segoe UI', system-ui, sans-serif;
   }
-  [data-theme="dark"] {
-    --bg: #111318;
-    --surface: #1c1f26;
-    --border: #2a2d35;
-    --text: #e8e8e8;
-    --text-muted: #888;
-    --accent: #ff7a35;
-    --accent-soft: #2a1a10;
-    --shadow: 0 2px 12px rgba(0,0,0,0.4);
+  :root[data-theme="dark"] {
+    --bg: #0f1612;
+    --surface: #1a2420;
+    --border: #2a3830;
+    --text: #e8f0ec;
+    --text-muted: #8a9e96;
+    --accent: #52b788;
+    --accent-light: #1a2e24;
+    --heading: #74c69d;
+    --code-bg: #141f1b;
+    --table-head: #1a2e24;
+    --table-stripe: #151e1a;
+    --toggle-bg: #52b788;
+    --toggle-icon: "🌙";
+    --shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
-    font-family: var(--font);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
     background: var(--bg);
     color: var(--text);
+    line-height: 1.7;
+    transition: background 0.2s, color 0.2s;
     min-height: 100vh;
-    transition: background 0.25s, color 0.25s;
   }
+
   header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    padding: 14px 24px;
+    padding: 0 24px;
+    height: 56px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow);
   }
+
   .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--accent);
-    letter-spacing: -0.3px;
+    letter-spacing: -0.02em;
   }
-  .logo svg { width: 26px; height: 26px; }
-  .controls { display: flex; align-items: center; gap: 12px; }
-  .theme-btn {
-    background: var(--accent-soft);
-    border: 1px solid var(--border);
-    color: var(--accent);
-    border-radius: 8px;
-    padding: 7px 14px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .theme-btn:hover { opacity: 0.8; }
-  .upload-btn {
-    background: var(--accent);
+
+  .logo span { color: var(--text-muted); font-weight: 400; }
+
+  .toggle {
+    background: var(--toggle-bg);
     border: none;
-    color: #fff;
-    border-radius: 8px;
-    padding: 7px 14px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    border-radius: 20px;
+    padding: 6px 14px;
     cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    font-size: 0.8rem;
+    color: white;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: opacity 0.2s;
   }
-  .upload-btn:hover { opacity: 0.85; }
-  #file-input { display: none; }
+  .toggle:hover { opacity: 0.85; }
+
   main {
     max-width: 780px;
     margin: 0 auto;
-    padding: 32px 24px 64px;
+    padding: 40px 24px 80px;
   }
-  .empty-state {
-    text-align: center;
-    padding: 80px 24px;
-    color: var(--text-muted);
-  }
-  .empty-state .icon { font-size: 3rem; margin-bottom: 16px; }
-  .empty-state h2 { font-size: 1.3rem; margin-bottom: 8px; color: var(--text); }
-  .empty-state p { font-size: 0.9rem; line-height: 1.6; }
-  .empty-state code {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1px 6px;
-    font-size: 0.85rem;
-  }
-  /* Markdown content styles */
-  .md-body h1 {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 10px;
-    margin-bottom: 24px;
-    margin-top: 0;
-  }
-  .md-body h2 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--text);
-    margin-top: 36px;
-    margin-bottom: 14px;
-    padding: 10px 14px;
-    background: var(--accent-soft);
+
+  #content h1 { font-size: 1.9rem; color: var(--heading); margin: 0 0 8px; font-weight: 800; letter-spacing: -0.03em; }
+  #content h2 { font-size: 1.3rem; color: var(--heading); margin: 40px 0 12px; font-weight: 700; padding-bottom: 6px; border-bottom: 2px solid var(--accent); }
+  #content h3 { font-size: 1.05rem; color: var(--accent); margin: 28px 0 10px; font-weight: 700; }
+  #content h4 { font-size: 0.95rem; color: var(--text-muted); margin: 20px 0 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  #content p { margin: 0 0 14px; color: var(--text); }
+  #content ul, #content ol { margin: 0 0 14px 20px; }
+  #content li { margin-bottom: 6px; }
+  #content strong { color: var(--heading); font-weight: 700; }
+  #content em { color: var(--text-muted); }
+
+  #content blockquote {
     border-left: 3px solid var(--accent);
+    background: var(--accent-light);
+    margin: 16px 0;
+    padding: 12px 16px;
     border-radius: 0 8px 8px 0;
-  }
-  .md-body h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin-top: 24px;
-    margin-bottom: 10px;
-  }
-  .md-body p {
+    color: var(--text-muted);
     font-size: 0.95rem;
-    line-height: 1.75;
-    margin-bottom: 14px;
-    color: var(--text);
   }
-  .md-body ul, .md-body ol {
-    padding-left: 20px;
-    margin-bottom: 14px;
-  }
-  .md-body li {
-    font-size: 0.95rem;
-    line-height: 1.75;
-    margin-bottom: 4px;
-  }
-  .md-body table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 0.9rem;
-    background: var(--surface);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-  }
-  .md-body th {
-    background: var(--accent);
-    color: #fff;
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 600;
-  }
-  .md-body td {
-    padding: 9px 14px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
-  }
-  .md-body tr:last-child td { border-bottom: none; }
-  .md-body tr:nth-child(even) td { background: var(--accent-soft); }
-  .md-body code {
-    background: var(--surface);
-    border: 1px solid var(--border);
+
+  #content code {
+    background: var(--code-bg);
+    padding: 2px 6px;
     border-radius: 4px;
-    padding: 1px 6px;
-    font-size: 0.85rem;
+    font-size: 0.88em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
     color: var(--accent);
   }
-  .md-body pre {
-    background: var(--surface);
+
+  #content pre {
+    background: var(--code-bg);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 8px;
     padding: 16px;
     overflow-x: auto;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
   }
-  .md-body pre code {
-    background: none;
-    border: none;
-    padding: 0;
-    color: var(--text);
-    font-size: 0.88rem;
-  }
-  .md-body blockquote {
-    border-left: 3px solid var(--accent);
-    background: var(--accent-soft);
-    margin: 0 0 16px 0;
-    padding: 10px 16px;
-    border-radius: 0 8px 8px 0;
-    color: var(--text-muted);
-    font-style: italic;
-    font-size: 0.93rem;
-  }
-  .md-body hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 28px 0;
-  }
-  .md-body strong { color: var(--text); font-weight: 700; }
-  .md-body a { color: var(--accent); text-decoration: none; }
-  .md-body a:hover { text-decoration: underline; }
-  .filename-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--surface);
+  #content pre code { background: none; padding: 0; color: var(--text); }
+
+  #content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+    font-size: 0.92rem;
+    border-radius: 8px;
+    overflow: hidden;
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
+  }
+  #content th {
+    background: var(--table-head);
+    color: var(--heading);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  #content td { padding: 10px 14px; border-top: 1px solid var(--border); vertical-align: top; }
+  #content tr:nth-child(even) td { background: var(--table-stripe); }
+
+  #content hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .loading, .error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    gap: 12px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .loading::before { content: ''; width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .updated {
     font-size: 0.78rem;
     color: var(--text-muted);
-    margin-bottom: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
   }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/>
-      <polyline points="12 6 12 12 16 14"/>
-    </svg>
-    Athlete Reminders
-  </div>
-  <div class="controls">
-    <button class="theme-btn" onclick="toggleTheme()">
-      <span id="theme-icon">🌙</span>
-      <span id="theme-label">Dark</span>
-    </button>
-    <button class="upload-btn" onclick="document.getElementById('file-input').click()">
-      📄 Load .md file
-    </button>
-    <input type="file" id="file-input" accept=".md,.markdown,.txt" onchange="loadFile(event)">
-  </div>
+  <div class="logo">🚴 Athlete Notes <span>/ race prep</span></div>
+  <button class="toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
 </header>
-
-<main id="main">
-  <div class="empty-state">
-    <div class="icon">🚴</div>
-    <h2>No file loaded yet</h2>
-    <p>Click <strong>Load .md file</strong> above to load your markdown reminders.<br><br>
-    Just paste your Claude recommendations into a <code>.md</code> file,<br>
-    save it, and load it here anytime.</p>
-  </div>
+<main>
+  <div id="content"><div class="loading"></div></div>
 </main>
-
 <script>
-  // Theme
-  const saved = localStorage.getItem('theme') || 'light';
-  setTheme(saved);
-
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    document.getElementById('theme-icon').textContent = t === 'dark' ? '☀️' : '🌙';
-    document.getElementById('theme-label').textContent = t === 'dark' ? 'Light' : 'Dark';
-    localStorage.setItem('theme', t);
-  }
-
   function toggleTheme() {
-    const cur = document.documentElement.getAttribute('data-theme');
-    setTheme(cur === 'dark' ? 'light' : 'dark');
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('themeBtn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
   }
 
-  // File loading
-  function loadFile(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = ev => renderMarkdown(ev.target.result, file.name);
-    reader.readAsText(file);
-  }
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀️ Light' : '🌙 Dark';
+  });
 
-  function renderMarkdown(text, filename) {
-    const main = document.getElementById('main');
-    main.innerHTML = `
-      <div class="filename-badge">📄 ${filename}</div>
-      <div class="md-body">${marked.parse(text)}</div>
-    `;
+  async function loadNotes() {
+    const el = document.getElementById('content');
+    try {
+      const res = await fetch('./notes.md?v=' + Date.now());
+      if (!res.ok) throw new Error(res.status);
+      const md = await res.text();
+      el.innerHTML = `<div class="updated">Last loaded: ${new Date().toLocaleString()}</div>` + marked.parse(md);
+    } catch(e) {
+      el.innerHTML = `<div class="error">⚠️ Could not load notes.md<br><small>Make sure the file is in the same folder as index.html</small></div>`;
+    }
   }
+  loadNotes();
 </script>
 </body>
 </html>
