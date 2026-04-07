@@ -1,219 +1,473 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Athlete Notes</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+<title>Race Nutrition Plan — Berlin</title>
 <style>
-  :root[data-theme="light"] {
-    --bg: #f5f5f0;
-    --surface: #ffffff;
-    --border: #e0e0d8;
-    --text: #1a1a1a;
-    --text-muted: #666;
-    --accent: #2d6a4f;
-    --accent-light: #e8f5ee;
-    --heading: #1a3a2a;
-    --code-bg: #f0f0eb;
-    --table-head: #e8f5ee;
-    --table-stripe: #fafaf7;
-    --toggle-bg: #2d6a4f;
-    --toggle-icon: "☀️";
-    --shadow: 0 2px 12px rgba(0,0,0,0.07);
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --sub: #555e7a;
+    --border: #e2e8f0;
+    --accent: #3b7dd8;
+    --green: #16a34a;
+    --amber: #d97706;
+    --red: #dc2626;
+    --pill-bg: #e8f0fd;
+    --pill-text: #1e40af;
+    --tag-bg: #f0fdf4;
+    --tag-text: #166534;
   }
-  :root[data-theme="dark"] {
-    --bg: #0f1612;
-    --surface: #1a2420;
-    --border: #2a3830;
-    --text: #e8f0ec;
-    --text-muted: #8a9e96;
-    --accent: #52b788;
-    --accent-light: #1a2e24;
-    --heading: #74c69d;
-    --code-bg: #141f1b;
-    --table-head: #1a2e24;
-    --table-stripe: #151e1a;
-    --toggle-bg: #52b788;
-    --toggle-icon: "🌙";
-    --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  .dark {
+    --bg: #0f1117;
+    --card: #1a1d2e;
+    --text: #e8eaf6;
+    --sub: #9aa3c2;
+    --border: #2a2d3e;
+    --accent: #6199e8;
+    --pill-bg: #1e2a4a;
+    --pill-text: #93b4f0;
+    --tag-bg: #14271f;
+    --tag-text: #4ade80;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; transition: background .3s, color .3s; min-height: 100vh; }
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-    transition: background 0.2s, color 0.2s;
-    min-height: 100vh;
-  }
+  header { background: var(--card); border-bottom: 1px solid var(--border); padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; }
+  header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: -.3px; }
+  header p { font-size: .8rem; color: var(--sub); margin-top: 2px; }
+  .toggle-btn { background: var(--pill-bg); color: var(--pill-text); border: none; border-radius: 20px; padding: 7px 16px; font-size: .85rem; cursor: pointer; font-weight: 600; transition: all .2s; }
+  .toggle-btn:hover { filter: brightness(1.1); }
 
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: var(--shadow);
-  }
+  .tabs { display: flex; gap: 6px; padding: 20px 24px 0; max-width: 900px; margin: 0 auto; }
+  .tab { padding: 9px 20px; border-radius: 8px 8px 0 0; border: 1px solid var(--border); border-bottom: none; background: var(--bg); color: var(--sub); font-size: .9rem; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .tab.active { background: var(--card); color: var(--accent); }
 
-  .logo {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-  }
+  .content { max-width: 900px; margin: 0 auto; padding: 0 24px 40px; }
+  .day { display: none; background: var(--card); border: 1px solid var(--border); border-radius: 0 8px 8px 8px; padding: 28px; }
+  .day.active { display: block; }
 
-  .logo span { color: var(--text-muted); font-weight: 400; }
+  .day-header { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .day-label { font-size: 1.3rem; font-weight: 700; }
+  .day-meta { font-size: .85rem; color: var(--sub); margin-top: 4px; }
+  .macro-strip { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .macro { background: var(--pill-bg); color: var(--pill-text); border-radius: 20px; padding: 5px 14px; font-size: .82rem; font-weight: 600; }
+  .macro.amber { background: #fef3c7; color: #92400e; }
+  .dark .macro.amber { background: #2d1f00; color: #fbbf24; }
+  .macro.green { background: var(--tag-bg); color: var(--tag-text); }
 
-  .toggle {
-    background: var(--toggle-bg);
-    border: none;
-    border-radius: 20px;
-    padding: 6px 14px;
-    cursor: pointer;
-    font-size: 0.8rem;
-    color: white;
-    font-weight: 600;
-    letter-spacing: 0.03em;
-    transition: opacity 0.2s;
-  }
-  .toggle:hover { opacity: 0.85; }
+  .section { margin-bottom: 24px; }
+  .section-title { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--sub); margin-bottom: 12px; }
 
-  main {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
-  }
+  .meal { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 10px; }
+  .meal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .meal-name { font-weight: 700; font-size: .95rem; }
+  .meal-time { font-size: .8rem; color: var(--sub); }
+  .meal-carbs { font-size: .8rem; font-weight: 700; color: var(--accent); background: var(--pill-bg); border-radius: 12px; padding: 3px 10px; }
+  .meal-items { list-style: none; }
+  .meal-items li { font-size: .88rem; color: var(--sub); padding: 3px 0; display: flex; justify-content: space-between; }
+  .meal-items li span { color: var(--accent); font-weight: 600; font-size: .82rem; }
+  .meal-note { font-size: .8rem; color: var(--amber); margin-top: 8px; font-style: italic; }
 
-  #content h1 { font-size: 1.9rem; color: var(--heading); margin: 0 0 8px; font-weight: 800; letter-spacing: -0.03em; }
-  #content h2 { font-size: 1.3rem; color: var(--heading); margin: 40px 0 12px; font-weight: 700; padding-bottom: 6px; border-bottom: 2px solid var(--accent); }
-  #content h3 { font-size: 1.05rem; color: var(--accent); margin: 28px 0 10px; font-weight: 700; }
-  #content h4 { font-size: 0.95rem; color: var(--text-muted); margin: 20px 0 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+  .supp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .supp { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .supp-name { font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
+  .supp-detail { font-size: .82rem; color: var(--sub); }
+  .supp-time { font-size: .78rem; color: var(--accent); font-weight: 600; margin-top: 6px; }
 
-  #content p { margin: 0 0 14px; color: var(--text); }
-  #content ul, #content ol { margin: 0 0 14px 20px; }
-  #content li { margin-bottom: 6px; }
-  #content strong { color: var(--heading); font-weight: 700; }
-  #content em { color: var(--text-muted); }
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--border); }
+  .tl-item { position: relative; margin-bottom: 16px; }
+  .tl-item::before { content: ''; position: absolute; left: -21px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid var(--card); }
+  .tl-time { font-size: .78rem; color: var(--sub); font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .tl-action { font-size: .9rem; font-weight: 600; margin-top: 1px; }
+  .tl-detail { font-size: .82rem; color: var(--sub); margin-top: 2px; }
+  .tl-item.race::before { background: var(--red); }
+  .tl-item.race .tl-action { color: var(--red); }
 
-  #content blockquote {
-    border-left: 3px solid var(--accent);
-    background: var(--accent-light);
-    margin: 16px 0;
-    padding: 12px 16px;
-    border-radius: 0 8px 8px 0;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-  }
+  .alert { background: var(--tag-bg); border: 1px solid #bbf7d0; border-radius: 10px; padding: 14px 16px; font-size: .85rem; color: var(--tag-text); margin-top: 16px; }
+  .dark .alert { border-color: #166534; }
+  .alert strong { display: block; margin-bottom: 4px; }
 
-  #content code {
-    background: var(--code-bg);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.88em;
-    font-family: 'SF Mono', 'Fira Code', monospace;
-    color: var(--accent);
-  }
-
-  #content pre {
-    background: var(--code-bg);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px;
-    overflow-x: auto;
-    margin: 0 0 16px;
-  }
-  #content pre code { background: none; padding: 0; color: var(--text); }
-
-  #content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 0 20px;
-    font-size: 0.92rem;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  #content th {
-    background: var(--table-head);
-    color: var(--heading);
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  #content td { padding: 10px 14px; border-top: 1px solid var(--border); vertical-align: top; }
-  #content tr:nth-child(even) td { background: var(--table-stripe); }
-
-  #content hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
-
-  .loading, .error {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 50vh;
-    gap: 12px;
-    color: var(--text-muted);
-    font-size: 0.95rem;
-  }
-  .loading::before { content: ''; width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .updated {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border);
-  }
+  .weight-box { background: var(--pill-bg); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: .87rem; color: var(--pill-text); line-height: 1.6; }
+  .weight-box strong { display: block; font-size: .95rem; margin-bottom: 4px; }
 </style>
 </head>
 <body>
+
 <header>
-  <div class="logo">🚴 Athlete Notes <span>/ race prep</span></div>
-  <button class="toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+  <div>
+    <h1>🚴 Berlin Race — Nutrition Plan</h1>
+    <p>66km Flat · 16:30 Start · Weight-Conscious</p>
+  </div>
+  <button class="toggle-btn" onclick="toggleTheme()">🌙 Dark</button>
 </header>
-<main>
-  <div id="content"><div class="loading"></div></div>
-</main>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab(0)">Thursday</div>
+  <div class="tab" onclick="switchTab(1)">Friday</div>
+  <div class="tab" onclick="switchTab(2)">Saturday</div>
+</div>
+
+<div class="content">
+
+<!-- THURSDAY -->
+<div class="day active">
+  <div class="day-header">
+    <div class="day-label">Thursday — Normal Training Day</div>
+    <div class="day-meta">2 days out · Modest caloric deficit okay · Normal training fueling</div>
+    <div class="macro-strip">
+      <div class="macro">Carbs: 5–6 g/kg (~360–432g)</div>
+      <div class="macro amber">Protein: 1.8–2.0 g/kg (~130–144g)</div>
+      <div class="macro">Fat: moderate</div>
+      <div class="macro green">~200–300 kcal deficit</div>
+    </div>
+  </div>
+
+  <div class="weight-box">
+    <strong>⚖️ Weight loss strategy — Thursday</strong>
+    Thursday is the day to apply a modest deficit. Two days out, it has zero impact on race performance but contributes to your long-term weight trajectory. Keep carbs adequate for training, prioritise protein to preserve muscle, and keep fat moderate. Do not deficit on Friday or Saturday.
+  </div>
+
+  <div class="section">
+    <div class="section-title">Meals</div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌅 Breakfast</div>
+          <div class="meal-time">~7:00am</div>
+        </div>
+        <div class="meal-carbs">~70g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>80g oats (dry) <span>~55g</span></li>
+        <li>150g skyr <span>~8g</span></li>
+        <li>100g berries <span>~7g</span></li>
+      </ul>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🍱 Lunch</div>
+          <div class="meal-time">~12:30pm</div>
+        </div>
+        <div class="meal-carbs">~90g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>200g cooked rice or pasta <span>~70g</span></li>
+        <li>150g chicken breast or tuna <span>~0g</span></li>
+        <li>Large salad + olive oil (small amount) <span>~10g</span></li>
+        <li>1 piece of fruit <span>~15g</span></li>
+      </ul>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🚴 During Training</div>
+          <div class="meal-time">If session >75 min</div>
+        </div>
+        <div class="meal-carbs">30–60g/hr</div>
+      </div>
+      <ul class="meal-items">
+        <li>Sports drink or gel per hour of intensity <span>30–60g</span></li>
+      </ul>
+      <div class="meal-note">⚠️ Do not under-fuel training sessions to chase the deficit — it destroys session quality and recovery</div>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌙 Dinner</div>
+          <div class="meal-time">~7:00pm</div>
+        </div>
+        <div class="meal-carbs">~100g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>250g cooked potato or sweet potato <span>~50g</span></li>
+        <li>150g lean protein (fish, chicken, eggs) <span>~0g</span></li>
+        <li>Large portion of vegetables <span>~15g</span></li>
+        <li>100g low-fat yoghurt or skyr <span>~8g</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Supplements</div>
+    <div class="supp-grid">
+      <div class="supp"><div class="supp-name">💊 Creatine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+      <div class="supp"><div class="supp-name">💊 Beta-alanine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FRIDAY -->
+<div class="day">
+  <div class="day-header">
+    <div class="day-label">Friday — Pre-Race Carb Day</div>
+    <div class="day-meta">1 day out · Increase carbs · Reduce fat & fibre · Light or rest day</div>
+    <div class="macro-strip">
+      <div class="macro">Carbs: 7–8 g/kg (~504–576g)</div>
+      <div class="macro amber">Protein: 1.6 g/kg (~115g) — slightly reduced to make room for carbs</div>
+      <div class="macro">Fat: low</div>
+      <div class="macro green">Maintenance calories — no deficit</div>
+    </div>
+  </div>
+
+  <div class="weight-box">
+    <strong>⚖️ Weight loss strategy — Friday</strong>
+    Friday is not a deficit day. Glycogen loading requires caloric headroom. Any deficit today directly compromises tomorrow's race performance. Accept the maintenance day — it will not derail your weight trajectory meaningfully. Shift from fat and protein to carbohydrates, and keep fibre low to avoid GI issues on Saturday.
+  </div>
+
+  <div class="section">
+    <div class="section-title">Meals</div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌅 Breakfast</div>
+          <div class="meal-time">~7:30am</div>
+        </div>
+        <div class="meal-carbs">~130g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>80g granola <span>~55g</span></li>
+        <li>1 large banana <span>~27g</span></li>
+        <li>2 tbsp jam <span>~28g</span></li>
+        <li>150g skyr <span>~8g</span></li>
+        <li>200ml apple juice <span>~20g</span></li>
+      </ul>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🍱 Lunch</div>
+          <div class="meal-time">~12:30pm</div>
+        </div>
+        <div class="meal-carbs">~150g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>300g cooked white pasta or rice <span>~105g</span></li>
+        <li>120g lean protein (chicken, tuna) <span>~0g</span></li>
+        <li>Simple tomato sauce (low fat) <span>~15g</span></li>
+        <li>White bread roll <span>~30g</span></li>
+      </ul>
+      <div class="meal-note">⚠️ Avoid heavy salads or raw vegetables — fibre will cause GI issues tomorrow</div>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🍎 Afternoon Snack</div>
+          <div class="meal-time">~3:30pm</div>
+        </div>
+        <div class="meal-carbs">~60g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>2 slices white toast with jam/honey <span>~50g</span></li>
+        <li>250ml sports drink <span>~25g</span></li>
+      </ul>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌙 Dinner</div>
+          <div class="meal-time">~7:00pm — keep it early</div>
+        </div>
+        <div class="meal-carbs">~150g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>300g cooked white rice <span>~105g</span></li>
+        <li>150g salmon or chicken <span>~0g</span></li>
+        <li>Cooked (not raw) vegetables — small portion <span>~15g</span></li>
+        <li>250ml apple juice <span>~25g</span></li>
+      </ul>
+      <div class="meal-note">⚠️ Keep dinner early — enough time to fully digest before tomorrow's 16:30 start</div>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌛 Evening Snack</div>
+          <div class="meal-time">~9:30pm if needed</div>
+        </div>
+        <div class="meal-carbs">~40–50g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>White toast with honey or jam <span>~40g</span></li>
+        <li>OR rice cakes (4–5 plain) <span>~40g</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Supplements</div>
+    <div class="supp-grid">
+      <div class="supp"><div class="supp-name">💊 Creatine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+      <div class="supp"><div class="supp-name">💊 Beta-alanine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SATURDAY -->
+<div class="day">
+  <div class="day-header">
+    <div class="day-label">Saturday — Race Day</div>
+    <div class="day-meta">16:30 Start · 66km Flat · Est. 90–120 min · Berlin</div>
+    <div class="macro-strip">
+      <div class="macro">Performance priority — no deficit</div>
+      <div class="macro green">~1.5–2 g/kg at breakfast · 1–2 g/kg at lunch</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⏱ Full Day Timeline</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-time">~8:00am</div>
+        <div class="tl-action">Breakfast + Creatine + Beta-alanine</div>
+        <div class="tl-detail">Normal morning meal — see below</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~12:00–12:30pm</div>
+        <div class="tl-action">Pre-race lunch (4 hours before start)</div>
+        <div class="tl-detail">Main carb top-up meal — see below</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~12:30pm</div>
+        <div class="tl-action">🌱 Nitrates — 2× beetroot shots</div>
+        <div class="tl-detail">Peak plasma nitrite at ~2–3h = right at race start</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~15:00</div>
+        <div class="tl-action">💊 Sodium Bicarbonate</div>
+        <div class="tl-detail">0.2–0.3 g/kg (14–22g) with 500ml water + small snack (rice cakes)</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~15:30</div>
+        <div class="tl-action">☕ Caffeine 200mg</div>
+        <div class="tl-detail">Peak at ~16:15–16:45 — covers the hard final third of the race</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~15:45–16:00</div>
+        <div class="tl-action">Small carb snack</div>
+        <div class="tl-detail">1–2 rice cakes or banana to keep blood glucose stable. If not hungry, skip.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~16:15</div>
+        <div class="tl-action">Gel #1 — pre-race (~22–25g carbs)</div>
+        <div class="tl-detail">CNS priming — activates oral carbohydrate receptors</div>
+      </div>
+      <div class="tl-item race">
+        <div class="tl-time">16:30</div>
+        <div class="tl-action">🚴 RACE START</div>
+        <div class="tl-detail">Est. 90–120 min. Flat course — expect sustained high tempo, not repeated surges</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~17:00 (~30 min in)</div>
+        <div class="tl-action">Gel #2 (~22–25g carbs)</div>
+        <div class="tl-detail">On a flat, controlled moment</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-time">~17:30 (~60 min in)</div>
+        <div class="tl-action">Gel #3 (~22–25g carbs)</div>
+        <div class="tl-detail">Important — 66km flat likely runs 90–120 min. Don't skip this one.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Meals</div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🌅 Breakfast</div>
+          <div class="meal-time">~8:00am — plenty of time to digest</div>
+        </div>
+        <div class="meal-carbs">~130g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>80g granola <span>~55g</span></li>
+        <li>1 large banana <span>~27g</span></li>
+        <li>2 tbsp jam <span>~28g</span></li>
+        <li>150g skyr <span>~8g</span></li>
+        <li>200ml apple juice <span>~20g</span></li>
+      </ul>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🍽️ Pre-Race Lunch</div>
+          <div class="meal-time">12:00–12:30pm · 4 hours before start</div>
+        </div>
+        <div class="meal-carbs">~120–140g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>250g cooked white rice or pasta <span>~90g</span></li>
+        <li>100g lean protein (chicken, fish) <span>~0g</span></li>
+        <li>Simple low-fat sauce <span>~10g</span></li>
+        <li>White bread roll <span>~30g</span></li>
+        <li>200ml sports drink or juice <span>~20g</span></li>
+      </ul>
+      <div class="meal-note">⚠️ Keep fat, fibre, and raw vegetables minimal — gastric emptying must be complete before the race</div>
+    </div>
+
+    <div class="meal">
+      <div class="meal-header">
+        <div>
+          <div class="meal-name">🍚 Bicarb Snack</div>
+          <div class="meal-time">~15:00 — with bicarb</div>
+        </div>
+        <div class="meal-carbs">~20–25g carbs</div>
+      </div>
+      <ul class="meal-items">
+        <li>2–3 plain rice cakes <span>~20g</span></li>
+      </ul>
+      <div class="meal-note">Purpose: buffer GI distress from bicarb, not primary fueling</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Supplements</div>
+    <div class="supp-grid">
+      <div class="supp"><div class="supp-name">🌱 Nitrates</div><div class="supp-detail">2× concentrated beetroot shots (~12–16 mmol)</div><div class="supp-time">12:30pm with lunch</div></div>
+      <div class="supp"><div class="supp-name">💊 Sodium Bicarbonate</div><div class="supp-detail">0.2–0.3 g/kg (14–22g) + 500ml water</div><div class="supp-time">15:00</div></div>
+      <div class="supp"><div class="supp-name">☕ Caffeine</div><div class="supp-detail">200mg — peak at ~16:15–16:45</div><div class="supp-time">15:30</div></div>
+      <div class="supp"><div class="supp-name">💊 Creatine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+      <div class="supp"><div class="supp-name">💊 Beta-alanine</div><div class="supp-detail">Normal daily dose</div><div class="supp-time">With breakfast</div></div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <strong>⚠️ Key difference vs. the 35km hilly race</strong>
+    At 66km flat, you're likely racing 90–120 minutes. This crosses the threshold where glycogen supercompensation becomes meaningfully relevant, and where 3 gels during the race (vs 2) are justified. Friday's carb loading day matters more here than it did for Saturday's race.
+  </div>
+
+  <div class="alert">
+    <strong>✅ No antibacterial mouthwash Saturday morning</strong>
+    Kills oral bacteria needed to convert dietary nitrate to nitrite. Skip it entirely on race day.
+  </div>
+</div>
+
+</div>
+
 <script>
+  function switchTab(n) {
+    document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===n));
+    document.querySelectorAll('.day').forEach((d,i) => d.classList.toggle('active', i===n));
+  }
   function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    document.getElementById('themeBtn').textContent = isDark ? '🌙 Dark' : '☀️ Light';
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    const dark = document.body.classList.toggle('dark');
+    document.querySelector('.toggle-btn').textContent = dark ? '☀️ Light' : '🌙 Dark';
   }
-
-  const saved = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-theme', saved);
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀️ Light' : '🌙 Dark';
-  });
-
-  async function loadNotes() {
-    const el = document.getElementById('content');
-    try {
-      const res = await fetch('./notes.md?v=' + Date.now());
-      if (!res.ok) throw new Error(res.status);
-      const md = await res.text();
-      el.innerHTML = `<div class="updated">Last loaded: ${new Date().toLocaleString()}</div>` + marked.parse(md);
-    } catch(e) {
-      el.innerHTML = `<div class="error">⚠️ Could not load notes.md<br><small>Make sure the file is in the same folder as index.html</small></div>`;
-    }
-  }
-  loadNotes();
 </script>
 </body>
 </html>
