@@ -54,14 +54,15 @@
   .meal-card:hover { border-color: rgba(196,98,58,0.35); }
   .meal-card.reuse { border-left: 3px solid var(--basil-light); }
 
-  .meal-top { padding: 1.1rem 1.4rem; display: grid; grid-template-columns: 86px 1fr auto; gap: 0 1.2rem; align-items: start; }
-  .slot-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding-top: 3px; line-height: 1.4; }
-  .meal-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
-  .meal-desc { font-size: 13px; color: var(--ink-light); line-height: 1.55; font-weight: 300; }
+  .meal-top { padding: 1rem 1.2rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .meal-top-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+  .slot-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); line-height: 1.4; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+  .meal-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.25rem; line-height: 1.3; }
+  .meal-desc { font-size: 13px; color: var(--ink-light); line-height: 1.6; font-weight: 300; word-break: break-word; }
   .meal-desc .kid-note { color: var(--basil); font-style: italic; }
-  .reuse-badge { font-size: 10px; background: #EAF4EE; color: #27500A; padding: 2px 8px; border-radius: 99px; font-weight: 500; white-space: nowrap; margin-top: 5px; display: inline-block; }
+  .reuse-badge { font-size: 11px; background: #EAF4EE; color: #27500A; padding: 3px 9px; border-radius: 99px; font-weight: 500; display: inline-block; max-width: 100%; white-space: normal; line-height: 1.4; margin-top: 4px; }
 
-  .macros { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; min-width: 72px; }
+  .macros { display: flex; flex-direction: row; flex-wrap: wrap; gap: 5px; }
   .macro-tag { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
   .tag-c { background: #EDF4FB; color: #1A5276; }
   .tag-p { background: #EAF4EE; color: #1D5631; }
@@ -105,10 +106,9 @@
   .shop-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--terracotta-light); flex-shrink: 0; }
 
   @media (max-width: 580px) {
-    .meal-top { grid-template-columns: 70px 1fr; }
-    .macros { display: none; }
     .recipe-grid { grid-template-columns: 1fr; }
     .day-summary { grid-template-columns: repeat(2, 1fr); }
+    .recipe-panel { padding: 1rem; }
   }
 </style>
 </head>
@@ -654,17 +654,17 @@ function renderDay(key) {
     const isReuse = m.reuse !== null;
     html += `<div class="meal-card${isReuse ? ' reuse' : ''}" onclick="toggleRecipe(this)">
       <div class="meal-top">
-        <div class="slot-label">${m.slot} <span class="toggle-arrow">▾</span></div>
-        <div class="meal-body">
-          <div class="meal-name">${m.name}</div>
-          <div class="meal-desc">${m.desc}</div>
-          ${m.reuse ? `<span class="reuse-badge">♻ ${m.reuse}</span>` : ''}
+        <div class="meal-top-header">
+          <span class="slot-label">${m.slot} <span class="toggle-arrow">▾</span></span>
+          <div class="macros">
+            <span class="macro-tag tag-c">У ${m.c}г</span>
+            <span class="macro-tag tag-p">Б ${m.p}г</span>
+            <span class="macro-tag tag-f">Ж ${m.f}г</span>
+          </div>
         </div>
-        <div class="macros">
-          <span class="macro-tag tag-c">У ${m.c}г</span>
-          <span class="macro-tag tag-p">Б ${m.p}г</span>
-          <span class="macro-tag tag-f">Ж ${m.f}г</span>
-        </div>
+        <div class="meal-name">${m.name}</div>
+        <div class="meal-desc">${m.desc}</div>
+        ${m.reuse ? `<span class="reuse-badge">♻ ${m.reuse}</span>` : ''}
       </div>
       <div class="recipe-panel">
         <div class="recipe-grid">
