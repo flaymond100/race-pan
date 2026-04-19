@@ -22,11 +22,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .zone-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .zone-lbl{color:#666}
 .zone-w{font-weight:500}
-.template-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px}
+.template-strip{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:8px}
 .t-day{background:#fff;border:1px solid #e5e7eb;border-radius:7px;padding:6px 4px;text-align:center}
 .t-day .td-name{font-weight:600;font-size:10px;color:#888;margin-bottom:3px}
 .t-day .td-type{font-size:10px;line-height:1.3}
 .t-day.off{background:#f9fafb;border-color:#f0f0f0}
+.block-note{font-size:11px;color:#666;margin-bottom:16px;padding:6px 10px;background:#fffbeb;border-radius:6px;border-left:3px solid #f59e0b}
 .phase-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
 .phase-tab{padding:9px 8px;border-radius:9px;cursor:pointer;border:1px solid #e5e7eb;background:#fff;text-align:left;transition:all .15s}
 .phase-tab:hover{background:#f9fafb}
@@ -94,6 +95,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:580px){
   .stat-grid{grid-template-columns:repeat(2,1fr)}
   .phase-tabs{grid-template-columns:repeat(2,1fr)}
+  .template-strip{grid-template-columns:repeat(7,1fr)}
+  .t-day{padding:4px 2px}
   .climb-row,.race-row{flex-wrap:wrap;gap:4px}
   .cl-name,.r-name{min-width:0;width:100%}
 }
@@ -104,7 +107,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="header" style="margin-bottom:20px">
   <h1>12-Week Marmotte Build Plan</h1>
-  <div class="sub">Apr 6 – Jun 28, 2026 &nbsp;·&nbsp; FTP 330W &nbsp;·&nbsp; MLSS 309W &nbsp;·&nbsp; MAP 400W &nbsp;·&nbsp; 72kg &nbsp;·&nbsp; Mon OFF · Strength: home (DBs + bands)</div>
+  <div class="sub">Apr 6 – Jun 28, 2026 &nbsp;·&nbsp; FTP 330W &nbsp;·&nbsp; MLSS 309W &nbsp;·&nbsp; MAP 400W &nbsp;·&nbsp; 72kg &nbsp;·&nbsp; Mon OFF · Home strength (DBs + bands)</div>
   <div class="stat-grid">
     <div class="stat-card"><div class="lbl">MLSS</div><div class="val" style="color:#f59e0b">309W</div><div class="hint">Z4 anchor</div></div>
     <div class="stat-card"><div class="lbl">CP est.</div><div class="val" style="color:#10b981">~330W</div><div class="hint">true threshold</div></div>
@@ -119,19 +122,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   <div class="zone-item"><div class="zone-dot" style="background:#3b82f6"></div><span class="zone-lbl">Z2 Endurance</span><span class="zone-w">198–248W</span></div>
   <div class="zone-item"><div class="zone-dot" style="background:#10b981"></div><span class="zone-lbl">Sweet Spot</span><span class="zone-w">290–314W</span></div>
   <div class="zone-item"><div class="zone-dot" style="background:#f59e0b"></div><span class="zone-lbl">Threshold</span><span class="zone-w">309–347W</span></div>
-  <div class="zone-item"><div class="zone-dot" style="background:#ef4444"></div><span class="zone-lbl">VO2max</span><span class="zone-w">335–379W</span></div>
+  <div class="zone-item"><div class="zone-dot" style="background:#ef4444"></div><span class="zone-lbl">VO2max</span><span class="zone-w">335–379W · MAP 400W</span></div>
   <div class="zone-item"><div class="zone-dot" style="background:#f97316"></div><span class="zone-lbl">Anaerobic</span><span class="zone-w">&gt;396W</span></div>
 </div>
 
 <div class="template-strip">
   <div class="t-day off"><div class="td-name">MON</div><div class="td-type" style="color:#ef4444;font-weight:600">OFF</div></div>
   <div class="t-day"><div class="td-name">TUE</div><div class="td-type" style="color:#6366f1">Strength</div></div>
-  <div class="t-day"><div class="td-name">WED</div><div class="td-type" style="color:#f59e0b">Quality 1</div></div>
-  <div class="t-day"><div class="td-name">THU</div><div class="td-type" style="color:#3b82f6">Z2 Easy</div></div>
-  <div class="t-day"><div class="td-name">FRI</div><div class="td-type" style="color:#f59e0b">Quality 2</div></div>
-  <div class="t-day"><div class="td-name">SAT</div><div class="td-type" style="color:#10b981">Long ride</div></div>
-  <div class="t-day"><div class="td-name">SUN</div><div class="td-type" style="color:#3b82f6">Endurance</div></div>
+  <div class="t-day" style="border-color:#ef4444;border-width:1.5px"><div class="td-name">WED</div><div class="td-type" style="color:#ef4444;font-weight:600">VO2max</div></div>
+  <div class="t-day" style="border-color:#f59e0b;border-width:1.5px"><div class="td-name">THU</div><div class="td-type" style="color:#f59e0b;font-weight:600">Threshold</div></div>
+  <div class="t-day" style="border-color:#10b981;border-width:1.5px"><div class="td-name">FRI</div><div class="td-type" style="color:#10b981;font-weight:600">Fat. Resist.</div></div>
+  <div class="t-day"><div class="td-name">SAT</div><div class="td-type" style="color:#3b82f6">Easy Z2</div></div>
+  <div class="t-day"><div class="td-name">SUN</div><div class="td-type" style="color:#10b981">Long Ride</div></div>
 </div>
+<div class="block-note">Wed → Thu → Fri = 3-day quality block with progressive fatigue accumulation. Friday SS hits on pre-fatigued legs from two prior sessions — this is the core Marmotte adaptation stimulus.</div>
 
 <div class="phase-tabs" id="phaseTabs"></div>
 <div class="phase-strip" id="phaseStrip"></div>
@@ -139,9 +143,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 <div class="race-cal" style="margin-top:20px">
   <div class="race-cal-head"><div class="zone-dot" style="background:#8b5cf6;width:9px;height:9px;border-radius:50%"></div>Race calendar</div>
-  <div class="race-row"><div class="r-date">Sun Apr 26</div><div class="r-name">Local Track Race</div><div class="r-pri pri-c">C</div></div>
+  <div class="race-row"><div class="r-date">Sun Apr 26</div><div class="r-name">Local Track Race — 60min (after 3h Z2 pre-load)</div><div class="r-pri pri-c">C</div></div>
   <div class="race-row"><div class="r-date">Sat May 16</div><div class="r-name">Road Classics Pálava 125km / 1,447m</div><div class="r-pri pri-b">B</div></div>
-  <div class="race-row"><div class="r-date">Sat May 30</div><div class="r-name">Alpe Granfondo 130km / 2,000m+ &nbsp;— Marmotte simulation</div><div class="r-pri pri-b">B</div></div>
+  <div class="race-row"><div class="r-date">Sat May 30</div><div class="r-name">Alpe Granfondo 130km / 2,000m+ — Marmotte simulation</div><div class="r-pri pri-b">B</div></div>
   <div class="race-row"><div class="r-date">Sat Jun 6</div><div class="r-name">Rund um den Dom 40km (flat)</div><div class="r-pri pri-c">C</div></div>
   <div class="race-row"><div class="r-date">Sun Jun 7</div><div class="r-name">NSC Leipzig 60km (flat)</div><div class="r-pri pri-c">C</div></div>
   <div class="race-row"><div class="r-date">Sun Jun 28</div><div class="r-name">Marmotte Granfondo Alpes 177km / 5,000m</div><div class="r-pri pri-a">A</div></div>
@@ -174,163 +178,176 @@ const TYPE={
 };
 
 const PHASES=[
-  {id:1,name:"Recovery & Transition",short:"Recovery", weeks:"Wk 1–2", color:"#3b82f6",light:"#eff6ff"},
-  {id:2,name:"Threshold Development",short:"Threshold",weeks:"Wk 3–6", color:"#f59e0b",light:"#fffbeb"},
-  {id:3,name:"Climbing Build",        short:"Build",    weeks:"Wk 7–9", color:"#ef4444",light:"#fef2f2"},
-  {id:4,name:"Progressive Taper",     short:"Taper",    weeks:"Wk 10–12",color:"#8b5cf6",light:"#f5f3ff"},
+  {id:1,name:"Recovery & Transition",  short:"Recovery",  weeks:"Wk 1–2",  color:"#3b82f6",light:"#eff6ff"},
+  {id:2,name:"VO2max Build",           short:"VO2 Build", weeks:"Wk 3–6",  color:"#ef4444",light:"#fef2f2"},
+  {id:3,name:"Climbing Build",         short:"Build",     weeks:"Wk 7–9",  color:"#f97316",light:"#fff7ed"},
+  {id:4,name:"Progressive Taper",      short:"Taper",     weeks:"Wk 10–12",color:"#8b5cf6",light:"#f5f3ff"},
 ];
 
 const STR={
-  F:{label:"Foundation",  detail:"3×10 @ RPE 7 · DBs + bands",color:"#818cf8"},
-  M:{label:"Max Strength",detail:"4×6 @ RPE 8-9 · DBs + bands",color:"#6366f1"},
-  ML:{label:"Max Str. (light)",detail:"3×5 @ RPE 7 · pre-race reduced",color:"#818cf8"},
-  C:{label:"Conversion",  detail:"3×5 @ RPE 7-8 · DBs + bands",color:"#4f46e5"},
+  F: {label:"Foundation",       detail:"3×10 @ RPE 7 · DBs + bands", color:"#818cf8"},
+  M: {label:"Max Strength",     detail:"4×6 @ RPE 8-9 · DBs + bands",color:"#6366f1"},
+  ML:{label:"Max Str. (light)", detail:"3×5 @ RPE 7 · pre-race",     color:"#818cf8"},
+  C: {label:"Conversion",       detail:"3×5 @ RPE 7-8 · DBs + bands",color:"#4f46e5"},
 };
 
-const strEx={
-  F:`Goblet Squat 3×10 · DB RDL 3×10 · DB Bulgarian Split 3×10/side · Banded Hip Thrust 3×12 · Pallof Press 3×10/side (band to door) · Copenhagen 2×10/side. Slow 3sec descent on all reps. RPE 7 on last set. ~50min total.`,
-  M:`DB Goblet Squat 4×6 (heaviest DB) · DB RDL 4×6 · DB Bulgarian Split 4×6/side · Banded Hip Thrust 3×8 (thick band + DB on lap if available) · Pallof Press 3×10/side · Copenhagen 3×12/side. 3–4min rest between heavy sets. 2sec pause at bottom of squats. RPE 8-9 on last set. ~60min.`,
-  ML:`DB Goblet Squat 3×5 · DB RDL 3×5 · DB Bulgarian Split 3×5/side · Banded Hip Thrust 3×6. Reduce load ~10% vs last session — conserve legs for the race. RPE 7 only. ~40min.`,
-  C:`DB Goblet Squat 3×5 · DB RDL 3×5 · DB Bulgarian Split 3×5/side · Banded Hip Thrust 2×8. Volume −30% from max strength, intensity maintained. RPE 7-8. ~35min.`,
-  CF:`DB Goblet Squat 3×4 · DB RDL 3×4 · DB Bulgarian Split 2×5/side · Banded Hip Thrust 2×6. Brief and controlled — adaptations are locked in. Final session before Marmotte. ~25min.`,
-};
+const sF=`Goblet Squat 3×10 · DB RDL 3×10 · DB Bulgarian Split 3×10/side · Banded Hip Thrust 3×12 · Pallof Press 3×10/side · Copenhagen 2×10/side. 3sec eccentric on every rep. RPE 7 on last set. ~50min.`;
+const sM=`DB Goblet Squat 4×6 (heaviest DB) · DB RDL 4×6 · DB Bulgarian Split 4×6/side · Banded Hip Thrust 3×8 + DB on lap if available · Pallof Press 3×10/side · Copenhagen 3×12/side. 3–4min rest between heavy sets. 2sec pause at bottom of squat. RPE 8-9 on last set. ~60min.`;
+const sML=`DB Goblet Squat 3×5 · DB RDL 3×5 · DB Bulgarian Split 3×5/side · Banded Hip Thrust 3×6. Reduce load ~10% vs last session — conserve legs for race. RPE 7 only. ~35min.`;
+const sC=`DB Goblet Squat 3×5 · DB RDL 3×5 · DB Bulgarian Split 3×5/side · Banded Hip Thrust 2×8. Volume −30% from max strength phase, intensity maintained. ~30min.`;
+const sCF=`DB Goblet Squat 3×4 · DB RDL 3×4 · DB Bulgarian Split 2×5/side · Banded Hip Thrust 2×6. Brief and controlled. Final session — adaptations are locked in. ~25min.`;
+
+const ron=`15min progressive WU → SET 1: 13×(30s @400W / 15s @200W) = 9min 45s → 3min easy @150W → SET 2: same → 3min easy → SET 3: same → 15min CD. Total hard work: ~19.5min. If you can't hold 400W on later reps, drop to 385W — don't cut reps. VO2 ratchets up through each set; expect to feel it building from rep 7–8.`;
+const ron2=`15min progressive WU → SET 1: 13×(30s @400W / 15s @200W) → 3min easy → SET 2: same → 15min CD. Reduced to 2 sets for taper week. Keep intensity at 400W — don't drop power.`;
+const ron4=`15min progressive WU → 4×13×(30s @400W / 15s @200W), 3min easy between sets → 15min CD. Peak VO2max volume. If set 4 power drops below 380W, cut it at 3 sets. Quality over quantity. Last hard VO2max session before Alpe Granfondo.`;
 
 const WEEKS=[
   // ── PHASE 1 ─────────────────────────────────────────────
   {week:1,phase:1,dates:"Apr 6–12",label:"Recovery / Absorption",tss:"280–320",
-   focus:"Full recovery from criterium DNF + illness + VO2max block. No cycling intensity this week. Saturday = 60km C race as training stimulus (replaces long ride). Issurin: VO2max adaptations persist 15–22 days post-block — fitness is still accruing while you rest.",
+   focus:"Full recovery from criterium DNF + illness + VO2max block. No cycling intensity this week. Saturday 60km C race replaces the long ride as training stimulus. Issurin: VO2max adaptations persist 15–22 days post-block — fitness still accruing while you rest.",
    sessions:[
-    {day:"Mon Apr 6",  name:"OFF",                   type:"REST",      watts:"—",                  detail:"Full rest. Monday is always your off day."},
-    {day:"Tue Apr 7",  name:"Strength F1 + 45min Z2",type:"Strength",  watts:"Home · DBs + bands", detail:strEx.F,str:"F"},
-    {day:"Wed Apr 8",  name:"90min Z2 easy",          type:"Z2",        watts:`${w(60)}–${w(72)}W`, detail:"Purely aerobic. No intensity — legs still absorbing race + illness + block stress."},
-    {day:"Thu Apr 9",  name:"90min Z2",               type:"Z2",        watts:`${w(60)}–${w(72)}W`, detail:"Easy endurance. Polarized recovery day."},
-    {day:"Fri Apr 10", name:"REST or 45min easy",     type:"REST",      watts:`<${w(58)}W`,         detail:"Pre-race legs. Either rest completely or 45min very easy spin — nothing more."},
-    {day:"Sat Apr 11", name:"60km C Race",            type:"Race",      watts:"Race effort",         detail:"C priority. Replaces the weekly long ride as training stimulus. Hard aerobic effort — no special prep, no result pressure."},
-    {day:"Sun Apr 12", name:"60min Z1 recovery",      type:"Recovery",  watts:`${w(52)}–${w(60)}W`, detail:"Genuinely easy spin post-race. ≤60% FTP. Flush the legs, no stress."},
+    {day:"Mon Apr 6",  name:"OFF",                   type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue Apr 7",  name:"Strength F1 + 45min Z2",type:"Strength", watts:"Home · DBs + bands", detail:sF,str:"F"},
+    {day:"Wed Apr 8",  name:"90min Z2 easy",          type:"Z2",       watts:`${w(60)}–${w(72)}W`, detail:"Purely aerobic. No intensity — legs still absorbing block + illness stress."},
+    {day:"Thu Apr 9",  name:"90min Z2",               type:"Z2",       watts:`${w(60)}–${w(72)}W`, detail:"Easy endurance."},
+    {day:"Fri Apr 10", name:"REST or 45min easy",     type:"REST",     watts:`<${w(58)}W`,         detail:"Pre-race legs. Rest or 45min very easy only."},
+    {day:"Sat Apr 11", name:"60km C Race",            type:"Race",     watts:"Race effort",         detail:"C priority. Replaces weekly long ride as training stimulus. Hard aerobic effort — no result pressure."},
+    {day:"Sun Apr 12", name:"60min Z1 recovery",      type:"Recovery", watts:`${w(52)}–${w(60)}W`, detail:"Easy post-race spin. ≤60% FTP. Flush the legs."},
   ]},
+
   {week:2,phase:1,dates:"Apr 13–19",label:"Crash Recovery — Back on Bike",tss:"220–260",updated:true,
-   focus:"Crash at Saturday's race — road rash on face, hands, arms, knees. No fractures. Strength skipped this week (hands/wrists too raw). Indoor only. Quality sessions dropped — aerobic base only. Fitness is not lost: Issurin's residual training effect means VO2max adaptations persist 15–22 days post-block. Cover all wounds before riding — sweat in open road rash increases infection risk.",
+   focus:"Crash at Saturday's race — road rash on face, hands, arms, knees. No fractures. Strength skipped (hands/wrists too raw). Indoor only. Cover all wounds before riding — sweat in open road rash increases infection risk. Fitness is not lost: VO2max adaptations persist 15–22 days.",
    sessions:[
-    {day:"Mon Apr 13", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest. Standard off day."},
-    {day:"Tue Apr 14", name:"Strength SKIPPED — crash",type:"REST",     watts:"—",                  detail:"Skipped — hands and wrists too raw for dumbbells or bands. Not worth risking reopening wounds. Strength resumes next week when skin has closed."},
-    {day:"Wed Apr 15", name:"REST — wound recovery",  type:"REST",      watts:"—",                  detail:"Rest. Let the skin start closing. Moist dressing protocol: clean 2× daily, Vaseline or Flamigel, non-stick dressing (Mepitel). No hydrogen peroxide."},
-    {day:"Thu Apr 16", name:"45–60min easy spin (first ride back)",type:"Z2", watts:`${w(52)}–${w(65)}W`, detail:"First ride back — indoor only. Z1–Z2 only, no pressure. If abs soreness from impact sharpens during riding (rather than background ache), stop. Cover all wounds before starting. Redress immediately after."},
-    {day:"Fri Apr 17", name:"60–75min Z2 indoor",     type:"Z2",        watts:`${w(62)}–${w(72)}W`, detail:"Indoor Z2. If Thursday felt good, add 2×8min sweet spot at 88–90% FTP near the end. Otherwise pure aerobic. Wounds should be closing — check for any redness spreading from edges (infection sign)."},
-    {day:"Sat Apr 18", name:"90min Z2 + openers (indoor)",type:"Z2",    watts:`3×5min @ ${w(108)}W`,detail:"Indoor. 60min easy Z2 base, then 3×5min at 106–110% FTP with 3min easy recovery. Keeps top-end sharp without overloading healing body. Reduced from planned 3h long ride — appropriate given crash 7 days ago."},
-    {day:"Sun Apr 19", name:"60min easy Z2 indoor",   type:"Z2",        watts:`${w(60)}–${w(70)}W`, detail:"Easy aerobic spin. Keep it relaxed. Assess how wounds and abs feel heading into next week — if all good, full training resumes Monday week 3."},
+    {day:"Mon Apr 13", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue Apr 14", name:"Strength SKIPPED",        type:"REST",     watts:"—",                  detail:"Skipped — hands/wrists too raw for dumbbells or bands. Resumes next week."},
+    {day:"Wed Apr 15", name:"REST — wound recovery",  type:"REST",     watts:"—",                  detail:"Rest. Moist dressing protocol: clean 2× daily, Vaseline or Flamigel, non-stick dressing (Mepitel). No hydrogen peroxide."},
+    {day:"Thu Apr 16", name:"45–60min first ride back",type:"Z2",      watts:`${w(52)}–${w(65)}W`, detail:"First ride back — indoor only. Z1–Z2 only. If abs soreness from impact sharpens during riding, stop. Cover all wounds before starting, redress after."},
+    {day:"Fri Apr 17", name:"60–75min Z2 indoor",     type:"Z2",       watts:`${w(62)}–${w(72)}W`, detail:"Indoor Z2. If Thursday felt good, add 2×8min at 88–90% FTP near the end. Otherwise pure aerobic."},
+    {day:"Sat Apr 18", name:"90min Z2 + openers indoor",type:"Z2",     watts:`3×5min @ ${w(108)}W`,detail:"60min easy Z2 → 3×5min at 106–110% FTP, 3min easy recovery. Keeps top-end sharp. Reduced from planned long ride given crash."},
+    {day:"Sun Apr 19", name:"60min easy Z2 indoor",   type:"Z2",       watts:`${w(60)}–${w(70)}W`, detail:"Easy aerobic. Assess how wounds and abs feel heading into next week."},
   ]},
+
   // ── PHASE 2 ─────────────────────────────────────────────
-  {week:3,phase:2,dates:"Apr 20–26",label:"Build + Taper → Track Race",tss:"360–400",
-   focus:"Two quality sessions Mon-Wed, then volume drops Thursday. Track race is Sunday Apr 26 — C priority, race it hard as a VO2max/anaerobic stimulus. Watch W'bal carefully — control the opening effort.",
+  {week:3,phase:2,dates:"Apr 20–26",label:"Return to Build + Race as Training",tss:"340–380",updated:true,
+   focus:"Transitional week post-crash. Sweet Spot Wednesday — first proper quality session. 3-day quality block (Wed VO2max → Thu Threshold → Fri Fatigue Resistance) begins properly from Week 4. Sunday = 3h Z2 pre-load into track race — first Marmotte fatigue simulation.",
    sessions:[
-    {day:"Mon Apr 20", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest."},
-    {day:"Tue Apr 21", name:"Strength F3 + 45min Z2", type:"Strength",  watts:"Home · DBs + bands", detail:strEx.F+" This is the final Foundation session — from next week strength transitions to Max phase.",str:"F"},
-    {day:"Wed Apr 22", name:"90min VO2 maintenance",  type:"VO2max",    watts:`3×5min @ ${w(110)}W`,detail:"Easy WU → 3×5min at 108–112% FTP / 356–369W, 3min easy recovery. Maintains VO2max ceiling within INSCYD zone (335–379W)."},
-    {day:"Thu Apr 23", name:"90min Z2 easy",          type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Easy spin. No intensity from here to race day."},
-    {day:"Fri Apr 24", name:"60min Activation",       type:"VO2max",    watts:`4×1min @ ${w(118)}W`,detail:"20min WU → 4×1min at ~120% FTP, 3min recovery → 20min CD. Prime fast-twitch for Sunday."},
-    {day:"Sat Apr 25", name:"45min Very easy",        type:"Z1",        watts:`${w(52)}–${w(60)}W`, detail:"Short easy spin only. Legs fresh for Sunday's race."},
-    {day:"Sun Apr 26", name:"🏁 TRACK RACE",          type:"Race",      watts:"Race effort",         detail:"C Priority. Race hard as VO2max/anaerobic stimulus. Manage W'bal — don't blow it in the first effort like the criterium. Treat it as hard training, not a goal event."},
+    {day:"Mon Apr 20", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue Apr 21", name:"Optional 45–60min easy", type:"Recovery", watts:`${w(52)}–${w(62)}W`, detail:"Optional easy spin — Z1 only. Skip if wounds still uncomfortable. No pressure."},
+    {day:"Wed Apr 22", name:"90min Sweet Spot",       type:"SS",       watts:`2×15min @ ${w(90)}W`,detail:"15min WU → 2×15min at 88–92% FTP (290–304W), 6min recovery → CD. First proper quality session post-crash. RPE 7/10. If feeling great, extend to 3×15min."},
+    {day:"Thu Apr 23", name:"90min Z2 easy",          type:"Z2",       watts:`${w(62)}–${w(70)}W`, detail:"Easy polarized day."},
+    {day:"Fri Apr 24", name:"60min Easy + openers",   type:"Z2",       watts:`4×30sec @ ${w(125)}W`,detail:"Easy ride, 4×30sec sharp openers near end. Short and controlled."},
+    {day:"Sat Apr 25", name:"45min Very easy",        type:"Z1",       watts:`${w(52)}–${w(60)}W`, detail:"Short easy spin. Legs fresh for Sunday's race."},
+    {day:"Sun Apr 26", name:"3h Z2 + 🏁 Track Race", type:"Race",     watts:`Z2 @${w(62)}–${w(72)}W → Race`,detail:"3h easy Z2 pre-load (eat 60g carbs/hr) → 30min transition → 60min track race at full effort. First Marmotte fatigue simulation: racing on tired legs mimics Alpe d'Huez conditions. If still crash-affected, reduce to 2h pre-load."},
   ]},
-  {week:4,phase:2,dates:"Apr 27–May 3",label:"Post-Race Rebuild",tss:"390–430",
-   focus:"Back into full training. Introduce Seiler's 4×8min format — most evidence-backed threshold/VO2max crossover (10.4% VO2max gain in 7 weeks, Seiler et al. 2013). Max Strength phase begins Tuesday.",
+
+  {week:4,phase:2,dates:"Apr 27–May 3",label:"First Full VO2max Block",tss:"420–460",
+   focus:"3-day quality block fully operational for the first time. Wed: Rønnestad 30/15 (fresh). Thu: 4×8min Seiler (pre-fatigued). Fri: Fatigue Resistance — Z2 pre-load + SS at end (maximally fatigued). This progressive fatigue structure is the primary Marmotte adaptation mechanism. Max Strength begins Tuesday.",
    sessions:[
-    {day:"Mon Apr 27", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest. Recovery from track race."},
-    {day:"Tue Apr 28", name:"Strength Max S1 + 45min Z2",type:"Strength",watts:"Home · DBs + bands",detail:strEx.M,str:"M"},
-    {day:"Wed Apr 29", name:"90min 4×8min Seiler",    type:"Threshold", watts:`4×8min @ ${w(105)}W`,detail:"15min WU → 4×8min at 103–107% FTP, 2min easy recovery between → CD. Gold-standard threshold/VO2max crossover protocol."},
-    {day:"Thu Apr 30", name:"90min Z2 easy",          type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Polarized easy day. Easy days must be truly easy to protect quality of hard days (Seiler)."},
-    {day:"Fri May 1",  name:"90min SS climbing",      type:"SS",        watts:`3×12min @ ${w(91)}W`,detail:"15min WU → 3×12min sweet spot at 89–93% FTP, 5min recovery → CD. Sub-threshold targeting Marmotte climb pacing."},
-    {day:"Sat May 2",  name:"3.5h Long Z2",           type:"Z2",        watts:`${w(62)}–${w(72)}W`, detail:"Progressive long ride. Purely aerobic — build duration tolerance for 177km."},
-    {day:"Sun May 3",  name:"2h Z2 endurance",        type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Back-to-back weekend endurance. Easy Z2 — extend aerobic load from Saturday."},
+    {day:"Mon Apr 27", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest. Recovery from track race."},
+    {day:"Tue Apr 28", name:"Strength Max S1 + 45min Z2",type:"Strength",watts:"Home · DBs + bands",detail:sM,str:"M"},
+    {day:"Wed Apr 29", name:"Rønnestad 30/15",        type:"VO2max",   watts:"3×13 @400W / 200W",  detail:ron},
+    {day:"Thu Apr 30", name:"4×8min Seiler",          type:"Threshold",watts:`4×8min @ ${w(105)}W`,detail:`15min WU → 4×8min at 103–107% FTP (340–353W), 2min easy recovery between → 15min CD. Deliberately on pre-fatigued legs from Wednesday's 30/15s. Seiler et al. (2013): +10.4% VO2max over 7 weeks with this format. RPE 7–8 on reps 1–2, rising to 8–9 on reps 3–4.`},
+    {day:"Fri May 1",  name:"Fatigue Resistance — Z2 + SS",type:"SS",  watts:`90min Z2 + 2×15min @${w(91)}W`,detail:`90min at 198–248W (eat 60g carbs/hr throughout) → 2×15min sweet spot at 290–304W (88–92% FTP), 8min easy between. Pre-fatigued from Wed + Thu — RPE will feel harder than fresh sweet spot. This is exactly the stimulus needed. Total: ~2h 15min.`},
+    {day:"Sat May 2",  name:"60min easy Z2",          type:"Z2",       watts:`${w(60)}–${w(70)}W`, detail:"Easy active recovery before Sunday's long ride."},
+    {day:"Sun May 3",  name:"3h Long Ride Z2",        type:"Z2",       watts:`${w(62)}–${w(72)}W`, detail:"3h entirely aerobic. No quality — purely building duration tolerance for 177km. Eat well: 60–70g carbs/hr. On somewhat tired legs from the 3-day block — correct."},
   ]},
-  {week:5,phase:2,dates:"May 4–10",label:"Threshold Development Peak",tss:"420–460",
-   focus:"Peak threshold block before Pálava taper. Saturday is the most important session before the B race: 4h with 2×25min sweet spot under fatigue. Sunday backs it up with easy endurance for back-to-back loading.",
+
+  {week:5,phase:2,dates:"May 4–10",label:"VO2max + Fatigue Load Build",tss:"460–500",
+   focus:"Step up from week 4: Rønnestad target all reps at 400W, Fatigue Resistance extended to 2h Z2 pre-load, Sunday long ride adds SS under fatigue. This week establishes the peak weekday quality load before Pálava taper.",
    sessions:[
-    {day:"Mon May 4",  name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest."},
-    {day:"Tue May 5",  name:"Strength Max S2 + 45min Z2",type:"Strength",watts:"Home · DBs + bands",detail:strEx.M,str:"M"},
-    {day:"Wed May 6",  name:"90min Over-Unders",      type:"Threshold", watts:"3×10min alternating", detail:`15min WU → 3×10min over-under: 2min @${w(90)}W / 1min @${w(106)}W cycling, 5min recovery → CD. Trains lactate tolerance for Marmotte's variable gradient.`},
-    {day:"Thu May 7",  name:"90min Z2 easy",          type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Easy polarized day."},
-    {day:"Fri May 8",  name:"90min Threshold",        type:"Threshold", watts:`2×20min @ ${w(95)}W`,detail:"15min WU → 2×20min at 93–97% FTP, 7min recovery → CD."},
-    {day:"Sat May 9",  name:"⭐ 4h Key Ride",          type:"SS",        watts:`2×25min @ ${w(91)}W`,detail:"First 2h easy Z2. Then 2×25min sweet spot at 90–92% FTP under fatigue, 10min recovery → 30min CD. Most important training ride before the B races."},
-    {day:"Sun May 10", name:"2h Z2 endurance",        type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Back-to-back weekend endurance. Easy Z2 only."},
+    {day:"Mon May 4",  name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue May 5",  name:"Strength Max S2 + 45min Z2",type:"Strength",watts:"Home · DBs + bands",detail:sM,str:"M"},
+    {day:"Wed May 6",  name:"Rønnestad 30/15",        type:"VO2max",   watts:"3×13 @400W / 200W",  detail:ron+` Aim for every rep at 400W — last week was intro. If feeling strong after set 3, add a 4th set.`},
+    {day:"Thu May 7",  name:"Over-Unders 3×10min",    type:"Threshold",watts:`${w(90)}W / ${w(106)}W`,detail:`15min WU → 3×10min over-under: 2min @${w(90)}W / 1min @${w(106)}W cycling, 5min recovery between → CD. Trains lactate tolerance for Marmotte's constantly varying gradient. On pre-fatigued legs from Wednesday.`},
+    {day:"Fri May 8",  name:"Fatigue Resistance — 2h Z2 + SS",type:"SS",watts:`2h Z2 + 2×20min @${w(91)}W`,detail:`2h at 198–248W (eat 60g carbs/hr — treat nutrition seriously on this ride) → 2×20min sweet spot at 290–304W, 10min easy between. Total: ~2h 45min. You're simulating the final 2 hours of Marmotte when legs are already cooked. RPE 8/10 by end of second interval — that's the point.`},
+    {day:"Sat May 9",  name:"60–75min easy Z2",       type:"Z2",       watts:`${w(60)}–${w(70)}W`, detail:"Easy recovery. Short and relaxed."},
+    {day:"Sun May 10", name:"3.5h Long Ride + SS",    type:"SS",       watts:`2h Z2 + 2×20min @${w(91)}W`,detail:"First 2h easy Z2. Then 2×20min sweet spot at 88–92% FTP under fatigue, 10min recovery between → 30min easy CD. Riding SS in the 3rd+ hour = direct Marmotte climbing simulation."},
   ]},
+
   {week:6,phase:2,dates:"May 11–17",label:"Taper → Pálava 125km",tss:"~370 incl. race",
-   focus:"5-day taper into Pálava (B race, Sat May 16). Target 88–92% FTP on climbs = 290–303W. Never spike above MLSS 309W. Eat every 45min from km 0. Treat as Marmotte dress rehearsal — learn pacing, collect data.",
+   focus:"5-day taper into Pálava (B race, Sat May 16). Rønnestad reduced to 2 sets. Threshold shortened to activation. Friday very easy. Race target: 88–92% FTP on climbs (290–303W), never above MLSS 309W. Collect pacing data for Marmotte calibration.",
    sessions:[
-    {day:"Mon May 11", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest."},
-    {day:"Tue May 12", name:"Strength Max S3 (reduced)",type:"Strength",watts:"Home · DBs + bands", detail:strEx.ML+" No extra spin today — conserve legs for Pálava.",str:"ML"},
-    {day:"Wed May 13", name:"90min Activation",       type:"Threshold", watts:`2×10min @ ${w(95)}W`,detail:"20min WU → 2×10min at 93–97% FTP → 20min CD. Keep feel without adding fatigue."},
-    {day:"Thu May 14", name:"75min Easy + openers",   type:"Z2",        watts:`4×1min @ ${w(118)}W`,detail:"Easy ride, 4×1min sprint openers near end. Legs should feel sharp."},
-    {day:"Fri May 15", name:"45min Very easy",        type:"Z1",        watts:`${w(55)}–${w(62)}W`, detail:"Short easy spin only."},
-    {day:"Sat May 16", name:"🏁 PÁLAVA 125km/1447m",  type:"Race",      watts:"290–303W on climbs",  detail:"B Priority — Marmotte dress rehearsal. Target 88–92% FTP on climbs. Never spike above 309W MLSS. Eat every 45min from km 0. Collect pacing/HR/RPE data to calibrate Marmotte targets."},
-    {day:"Sun May 17", name:"REST",                   type:"REST",      watts:"—",                  detail:"Full rest. Legs will be tired after 125km/1447m."},
+    {day:"Mon May 11", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue May 12", name:"Strength Max S3 (reduced)",type:"Strength",watts:"Home · DBs + bands",detail:sML,str:"ML"},
+    {day:"Wed May 13", name:"Rønnestad 30/15 (reduced)",type:"VO2max", watts:"2×13 @400W / 200W",  detail:ron2},
+    {day:"Thu May 14", name:"2×10min threshold activation",type:"Threshold",watts:`2×10min @ ${w(95)}W`,detail:`20min WU → 2×10min at 93–97% FTP (307–320W), 6min recovery → 15min CD. Light activation only.`},
+    {day:"Fri May 15", name:"45min Very easy",        type:"Z1",       watts:`${w(52)}–${w(60)}W`, detail:"Short easy spin only."},
+    {day:"Sat May 16", name:"🏁 PÁLAVA 125km/1447m",  type:"Race",     watts:"290–303W on climbs",  detail:"B Priority — Marmotte dress rehearsal. Target 88–92% FTP on climbs. Never spike above MLSS 309W. Eat every 45min from km 0. Collect pacing/HR/RPE data to calibrate Marmotte targets."},
+    {day:"Sun May 17", name:"REST",                   type:"REST",     watts:"—",                  detail:"Full rest. Legs will be tired after 125km/1447m."},
   ]},
+
   // ── PHASE 3 ─────────────────────────────────────────────
-  {week:7,phase:3,dates:"May 18–24",label:"Post-Pálava + Rebuild",tss:"380–420",
-   focus:"Easy Tuesday after 125km race. Recalibrate Marmotte targets from Pálava data. Max Strength continues; reduce load if legs still heavy. Back-to-back weekend resumes. This feeds directly into the Alpe Granfondo race week.",
+  {week:7,phase:3,dates:"May 18–24",label:"Post-Pálava + Climbing Build",tss:"450–490",
+   focus:"Easy Tuesday after 125km. Recalibrate Marmotte targets from Pálava data. Full 3-day quality block resumes Wednesday. Sunday long ride is biggest of the plan — 4h with 2×25min SS under fatigue.",
    sessions:[
-    {day:"Mon May 18", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest. Recovery from Pálava."},
-    {day:"Tue May 19", name:"Strength Max S4",        type:"Strength",  watts:"Home · DBs + bands", detail:strEx.M+" Reduce load ~10% if legs still heavy from Pálava race.",str:"M"},
-    {day:"Wed May 20", name:"90min Z2 / SS assess",   type:"SS",        watts:`2×6min @ ${w(95)}W`, detail:"Easy Z2. Add 2×6min at 95% FTP only if legs feel genuinely good. If still flat from Pálava, ride Z2 only."},
-    {day:"Thu May 21", name:"90min Threshold back",   type:"Threshold", watts:`3×8min @ ${w(105)}W`,detail:"15min WU → 3×8min at 103–107% FTP, 3min recovery → CD. Back into quality work."},
-    {day:"Fri May 22", name:"90min Z2 easy",          type:"Z2",        watts:`${w(63)}–${w(70)}W`, detail:"Easy day before big weekend."},
-    {day:"Sat May 23", name:"3.5–4h Long + SS",       type:"SS",        watts:`2×25min @ ${w(91)}W`,detail:"2h easy → 2×25min sweet spot at 90–92% FTP, 10min recovery → 30min CD."},
-    {day:"Sun May 24", name:"2h Z2 endurance",        type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Back-to-back weekend. Easy Z2 — riding fatigued is the stimulus."},
+    {day:"Mon May 18", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest. Recovery from Pálava race."},
+    {day:"Tue May 19", name:"Strength Max S4",        type:"Strength", watts:"Home · DBs + bands", detail:sM+" Reduce load ~10% if legs still heavy from Pálava.",str:"M"},
+    {day:"Wed May 20", name:"Rønnestad 30/15",        type:"VO2max",   watts:"3×13 @400W / 200W",  detail:ron+" Assess legs before committing to 400W — if Pálava damage still present, reduce ON power to 380W. Quality over ego."},
+    {day:"Thu May 21", name:"4×8min Seiler",          type:"Threshold",watts:`4×8min @ ${w(107)}W`,detail:`15min WU → 4×8min at 105–108% FTP (347–356W), 2min easy between → CD. Slightly higher intensity than week 4.`},
+    {day:"Fri May 22", name:"Fatigue Resistance — 2h Z2 + SS",type:"SS",watts:`2h Z2 + 2×20min @${w(91)}W`,detail:`2h Z2 pre-load → 2×20min sweet spot at 290–304W, 10min easy between. Third consecutive quality day — legs will feel it. Core Marmotte adaptation stimulus.`},
+    {day:"Sat May 23", name:"60–75min easy Z2",       type:"Z2",       watts:`${w(60)}–${w(70)}W`, detail:"Easy recovery. Short."},
+    {day:"Sun May 24", name:"4h Long Ride + SS",      type:"SS",       watts:`2h Z2 + 2×25min @${w(91)}W`,detail:"First 2h easy Z2. Then 2×25min sweet spot at 88–92% FTP under fatigue, 10min recovery → 30min CD. Bigger SS load than week 5. Most demanding long ride yet."},
   ]},
-  {week:8,phase:3,dates:"May 25–31",label:"⭐ Peak — Alpe Granfondo",tss:"450–510",updated:true,
-   focus:"Alpe Granfondo (130km/2000m+) on Saturday May 30 IS the Marmotte simulation — better than any planned training ride. Wed is last hard quality session before the race. Thu–Fri are reduced due to travel. Jun 1 (Mon) is optional easy recovery rather than full OFF.",
+
+  {week:8,phase:3,dates:"May 25–31",label:"⭐ Peak + Alpe Granfondo",tss:"480–520",updated:true,
+   focus:"Alpe Granfondo (130km/2000m+, Sat May 30) IS the Marmotte simulation. Peak 4-set Rønnestad on Wednesday before travel. Thu/Fri reduced due to travel constraints. Sat = race. Sun = easy recovery.",
    sessions:[
-    {day:"Mon May 25", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest before the peak week."},
-    {day:"Tue May 26", name:"Strength Max PEAK",      type:"Strength",  watts:"Home · DBs + bands", detail:strEx.M+" This is the final and heaviest Max Strength session of the plan.",str:"M"},
-    {day:"Wed May 27", name:"90min 4×8min quality",   type:"Threshold", watts:`4×8min @ ${w(107)}W`,detail:"15min WU → 4×8min at 105–108% FTP → CD. Last hard quality session before the race. Seiler protocol — maintain VO2max ceiling."},
-    {day:"Thu May 28", name:"60min Z2 easy (travel)", type:"Z2",        watts:`${w(60)}–${w(70)}W`, detail:"Traveling day — 60min easy only. No intensity. Just keep the legs moving. Indoor trainer fine."},
-    {day:"Fri May 29", name:"45min Pre-race activation (travel)",type:"Threshold",watts:`2×5min @ ${w(93)}W`,detail:"Traveling day — 45min total. 15min WU → 2×5min at 91–95% FTP, 3min recovery → 10min CD. Prime the aerobic system for tomorrow's race. Keep RPE controlled."},
-    {day:"Sat May 30", name:"🏁 ALPE GRANFONDO 130km/2000m+",type:"Race",watts:"290–303W on climbs",detail:"B Priority — this IS your Marmotte simulation. 130km/2000m race conditions. Target 88–92% FTP on climbs, never above MLSS 309W. Eat 70–80g carbs/hr. Use Pálava pacing data to calibrate. Collect HR/power/RPE data for final Marmotte calibration."},
-    {day:"Sun May 31", name:"60–90min Z1 recovery",   type:"Recovery",  watts:`${w(50)}–${w(60)}W`, detail:"Easy recovery spin after the race. Very easy — legs will be tired. No intensity."},
+    {day:"Mon May 25", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest before peak week."},
+    {day:"Tue May 26", name:"Strength Max PEAK",      type:"Strength", watts:"Home · DBs + bands", detail:sM+" Final and heaviest Max Strength session of the plan.",str:"M"},
+    {day:"Wed May 27", name:"Rønnestad 30/15 PEAK",   type:"VO2max",   watts:"4×13 @400W / 200W",  detail:ron4},
+    {day:"Thu May 28", name:"60min Z2 easy (travel)", type:"Z2",       watts:`${w(60)}–${w(70)}W`, detail:"Travel day — 60min easy indoor only. No intensity. Keep legs moving."},
+    {day:"Fri May 29", name:"45min Pre-race activation (travel)",type:"Threshold",watts:`2×5min @ ${w(93)}W`,detail:`Travel day — 45min total. 15min WU → 2×5min at 91–95% FTP (300–313W), 3min recovery → 10min CD. Prime aerobic system for Saturday's race.`},
+    {day:"Sat May 30", name:"🏁 ALPE GRANFONDO 130km/2000m+",type:"Race",watts:"290–303W on climbs",detail:"B Priority — this IS your Marmotte simulation. Race conditions 130km/2000m. Target 88–92% FTP on climbs, never above MLSS 309W. Eat 70–80g carbs/hr from km 0. Use Pálava data to calibrate. Collect HR/power/RPE for final Marmotte calibration."},
+    {day:"Sun May 31", name:"60–90min Z1 recovery",   type:"Recovery", watts:`${w(50)}–${w(60)}W`, detail:"Very easy recovery spin after race. ≤60% FTP. No intensity."},
   ]},
+
   {week:9,phase:3,dates:"Jun 1–7",label:"Conversion + Jun Races",tss:"380–420",updated:true,
-   focus:"Jun 1 (Mon) is an optional easy recovery ride instead of full OFF — good active recovery after Alpe Granfondo. Jun 4 (Thu) is off due to travel. Rund um den Dom (Sat Jun 6) + NSC Leipzig (Sun Jun 7) are training stimuli — not taper events. Travel back after Jun 7 race.",
+   focus:"Jun 1 (Mon) optional easy recovery instead of full OFF. Strength transitions to Conversion. Thu Jun 4 OFF — travel. Sat Jun 6 + Sun Jun 7 = C races — training stimuli only. Travel back after Jun 7.",
    sessions:[
-    {day:"Mon Jun 1",  name:"Optional 60–90min Z1 recovery",type:"Recovery",watts:`${w(50)}–${w(60)}W`,detail:"Normally OFF, but active recovery is beneficial 2 days after Alpe Granfondo. Very easy spin only — 60–90min max, ≤60% FTP. Skip if legs feel very heavy."},
-    {day:"Tue Jun 2",  name:"Strength Conv. S1",      type:"Strength",  watts:"Home · DBs + bands", detail:strEx.C,str:"C"},
-    {day:"Wed Jun 3",  name:"90min Threshold maint.", type:"Threshold", watts:`3×8min @ ${w(103)}W`,detail:"15min WU → 3×8min at 101–105% FTP, 3min recovery → CD."},
-    {day:"Thu Jun 4",  name:"OFF (travel)",           type:"REST",      watts:"—",                  detail:"Traveling day — full rest. No training."},
-    {day:"Fri Jun 5",  name:"60min Easy + openers",   type:"Z2",        watts:`4×30sec @ ${w(130)}W`,detail:"Easy ride, 4×30sec sprint openers near end. Activate fast-twitch for race weekend."},
-    {day:"Sat Jun 6",  name:"🏁 Rund um den Dom 40km",type:"Race",      watts:"Race effort",         detail:"C Priority. Flat 40km — treat as extended threshold/VO2max training stimulus. Don't sacrifice Marmotte prep for a result here."},
-    {day:"Sun Jun 7",  name:"🏁 NSC Leipzig 60km + travel",type:"Race", watts:"~90–95% FTP",        detail:"C Priority. Back-to-back racing. Manage fatigue — training load, not peaking. Travel back to Austria after the race (or Mon Jun 8)."},
+    {day:"Mon Jun 1",  name:"Optional 60–90min Z1 recovery",type:"Recovery",watts:`${w(50)}–${w(60)}W`,detail:"Normally OFF, but active recovery 2 days after Alpe Granfondo is beneficial. Very easy — ≤60% FTP. Skip if legs feel very heavy."},
+    {day:"Tue Jun 2",  name:"Strength Conv. S1",      type:"Strength", watts:"Home · DBs + bands", detail:sC,str:"C"},
+    {day:"Wed Jun 3",  name:"Rønnestad 30/15",        type:"VO2max",   watts:"3×13 @400W / 200W",  detail:ron+" Back to 3 sets — maintain VO2max ceiling heading into taper."},
+    {day:"Thu Jun 4",  name:"OFF (travel)",           type:"REST",     watts:"—",                  detail:"Travel day — full rest."},
+    {day:"Fri Jun 5",  name:"60min Easy + openers",   type:"Z2",       watts:`4×30sec @ ${w(130)}W`,detail:"Easy ride, 4×30sec sprint openers near end. Activate fast-twitch for race weekend."},
+    {day:"Sat Jun 6",  name:"🏁 Rund um den Dom 40km",type:"Race",     watts:"Race effort",         detail:"C Priority. Flat 40km — treat as extended threshold/VO2max training stimulus."},
+    {day:"Sun Jun 7",  name:"🏁 NSC Leipzig 60km + travel",type:"Race",watts:"~90–95% FTP",        detail:"C Priority. Back-to-back racing — training load only. Travel back to Austria after race."},
   ]},
+
   // ── PHASE 4 ─────────────────────────────────────────────
   {week:10,phase:4,dates:"Jun 8–14",label:"Taper Begins (−25% volume)",tss:"300–340",updated:true,
-   focus:"Jun 8 (Mon) OFF as usual — travel recovery from race weekend. Final strength session Tuesday. Jun 13 (Sat) is off — long ride shifts to Sunday Jun 14. Mujika & Padilla (2003): maintain intensity, cut volume.",
+   focus:"Volume drops 25%. Intensity maintained — Mujika & Padilla (2003): critical for performance gains. Final strength session Tuesday. Jun 13 (Sat) OFF as requested — long ride shifts to Sun Jun 14.",
    sessions:[
-    {day:"Mon Jun 8",  name:"OFF (travel / recovery)", type:"REST",     watts:"—",                  detail:"Full rest. Travel back to Austria if not done Sunday. Recovery from back-to-back races."},
-    {day:"Tue Jun 9",  name:"⚡ FINAL Strength",       type:"Strength", watts:"Home — last session", detail:strEx.CF+" Adaptations are locked in — no more lifting before Marmotte.",str:"C"},
-    {day:"Wed Jun 10", name:"90min Threshold maint.",  type:"Threshold",watts:`2×15min @ ${w(95)}W`,detail:"15min WU → 2×15min at 93–97% FTP, 7min recovery → CD."},
-    {day:"Thu Jun 11", name:"90min Z2 easy",           type:"Z2",       watts:`${w(62)}–${w(70)}W`, detail:"Easy polarized day."},
-    {day:"Fri Jun 12", name:"90min VO2 openers",       type:"VO2max",   watts:`3×5min @ ${w(108)}W`,detail:"15min WU → 3×5min at 106–110% FTP / 350–363W, 3min recovery → CD. Keep top-end sharp."},
-    {day:"Sat Jun 13", name:"OFF (day off)",           type:"REST",     watts:"—",                  detail:"Day off as requested. Long ride shifts to Sunday."},
-    {day:"Sun Jun 14", name:"2.5h Easy endurance",     type:"Z2",       watts:`${w(62)}–${w(72)}W`, detail:"Shortened long ride (shifted from Saturday). Purely aerobic."},
+    {day:"Mon Jun 8",  name:"OFF (travel / recovery)", type:"REST",    watts:"—",                  detail:"Full rest. Travel back to Austria if not done Sunday. Recovery from back-to-back races."},
+    {day:"Tue Jun 9",  name:"⚡ FINAL Strength Conv. S2",type:"Strength",watts:"Home — last ever",  detail:sCF+" Adaptations locked in — no more lifting before Marmotte.",str:"C"},
+    {day:"Wed Jun 10", name:"2×15min Threshold",      type:"Threshold",watts:`2×15min @ ${w(95)}W`,detail:`15min WU → 2×15min at 93–97% FTP (307–320W), 7min recovery → CD.`},
+    {day:"Thu Jun 11", name:"90min Z2 easy",          type:"Z2",       watts:`${w(62)}–${w(70)}W`, detail:"Easy polarized day."},
+    {day:"Fri Jun 12", name:"Rønnestad 30/15 (reduced)",type:"VO2max", watts:"2×13 @400W / 200W",  detail:ron2},
+    {day:"Sat Jun 13", name:"OFF (day off)",          type:"REST",     watts:"—",                  detail:"Day off as requested. Long ride shifts to Sunday."},
+    {day:"Sun Jun 14", name:"2.5h Easy endurance",    type:"Z2",       watts:`${w(62)}–${w(72)}W`, detail:"Shortened long ride. Purely aerobic."},
   ]},
-  {week:11,phase:4,dates:"Jun 15–21",label:"Deep Taper (−50% volume)",tss:"200–240",updated:true,
-   focus:"Jun 15 (Mon) is already the OFF day — no conflict. Volume halved from peak. All intensity sessions shortened but power targets unchanged. Legs should feel noticeably fresher by Thursday. No strength at all this week.",
+
+  {week:11,phase:4,dates:"Jun 15–21",label:"Deep Taper (−50% volume)",tss:"200–240",
+   focus:"Jun 15 (Mon) is already the regular OFF day — no conflict. Volume halved from peak. Intensity sessions shortened but power targets unchanged. No strength at all this week. Legs should feel noticeably fresher by Thursday.",
    sessions:[
-    {day:"Mon Jun 15", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest — already the regular off day. No conflict with your schedule."},
-    {day:"Tue Jun 16", name:"REST",                   type:"REST",      watts:"—",                  detail:"Full rest. No strength, no bike. Deep taper."},
-    {day:"Wed Jun 17", name:"75min SS + openers",     type:"SS",        watts:`2×10min @ ${w(91)}W`,detail:"20min WU → 2×10min sweet spot, 5min recovery → 2×1min @120% FTP → 15min CD."},
-    {day:"Thu Jun 18", name:"75min Z2 easy",          type:"Z2",        watts:`${w(62)}–${w(70)}W`, detail:"Easy spin. Legs should feel noticeably fresher."},
-    {day:"Fri Jun 19", name:"60min Activation",       type:"Threshold", watts:`3×5min @ ${w(96)}W`, detail:"20min WU → 3×5min at 94–98% FTP, 3min recovery → CD."},
-    {day:"Sat Jun 20", name:"2h Easy + SS",           type:"SS",        watts:`3×8min @ ${w(91)}W`, detail:"90min easy Z2 → 3×8min sweet spot at 89–93% FTP, 4min recovery. Stay smooth and relaxed."},
-    {day:"Sun Jun 21", name:"60min Easy spin",        type:"Z2",        watts:`${w(60)}–${w(68)}W`, detail:"Short easy ride. Legs should feel genuinely good now."},
+    {day:"Mon Jun 15", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest — already regular off day."},
+    {day:"Tue Jun 16", name:"REST",                   type:"REST",     watts:"—",                  detail:"Full rest. No strength, no bike. Deep taper."},
+    {day:"Wed Jun 17", name:"75min SS + openers",     type:"SS",       watts:`2×10min @${w(91)}W + 2×1min @${w(120)}W`,detail:`20min WU → 2×10min sweet spot (88–92% FTP), 5min recovery → 2×1min at 120% FTP → 15min CD.`},
+    {day:"Thu Jun 18", name:"75min Z2 easy",          type:"Z2",       watts:`${w(62)}–${w(70)}W`, detail:"Easy spin. Legs should feel fresher."},
+    {day:"Fri Jun 19", name:"60min Activation",       type:"Threshold",watts:`3×5min @ ${w(96)}W`, detail:"20min WU → 3×5min at 94–98% FTP, 3min recovery → CD."},
+    {day:"Sat Jun 20", name:"2h Easy + Rønnestad mini",type:"VO2max",  watts:"1×13 @400W / 200W",  detail:"90min easy Z2 → 1 set: 13×(30s @400W / 15s @200W) → 15min CD. Single set only — maintain top-end sharpness without fatigue accumulation."},
+    {day:"Sun Jun 21", name:"60min Easy spin",        type:"Z2",       watts:`${w(60)}–${w(68)}W`, detail:"Short easy ride. Legs should feel genuinely good now."},
   ]},
+
   {week:12,phase:4,dates:"Jun 22–28",label:"Race Week → MARMOTTE",tss:"~150 + race",
-   focus:"Arrive at the start line fresh, sharp, and confident. Every session this week serves one purpose: feel good Sunday. Marmotte pacing: 88–92% FTP on climbs (290–303W), never above MLSS 309W.",
+   focus:"Every session this week serves one purpose: feel good Sunday. Marmotte pacing: 88–92% FTP on climbs (290–303W), never above MLSS 309W. Galibier altitude reduces power ~15% — trust feel over numbers above 2000m.",
    sessions:[
-    {day:"Mon Jun 22", name:"OFF",                    type:"REST",      watts:"—",                  detail:"Full rest."},
-    {day:"Tue Jun 23", name:"60min Z2 + openers",     type:"Z2",        watts:`4×1min @ ${w(118)}W`,detail:"Easy ride, 4×1min openers at end. Priming the system."},
-    {day:"Wed Jun 24", name:"45min Activation",       type:"Threshold", watts:`2×5min @ ${w(95)}W`, detail:"15min WU → 2×5min at 93–97% FTP → 15min CD. Last quality effort before race."},
-    {day:"Thu Jun 25", name:"30min Very easy",        type:"Z1",        watts:`${w(52)}–${w(60)}W`, detail:"Light spin. Shake the legs out. Don't chase any effort."},
-    {day:"Fri Jun 26", name:"20min Recon / REST",     type:"Z1",        watts:`${w(52)}–${w(58)}W`, detail:"Optional 20min easy spin on race course, or full rest. Eat 10–12g carbs/kg today. Sleep by 9pm."},
-    {day:"Sat Jun 27", name:"REST — arrive / prep",   type:"REST",      watts:"—",                  detail:"Full rest. Race registration, course recon on foot, gear check. Eat 8–10g carbs/kg. Early bed."},
-    {day:"Sun Jun 28", name:"🏆 MARMOTTE 177km/5000m",type:"Race",      watts:"290–303W on climbs",  detail:"A Priority. Croix de Fer → Télégraphe → Galibier (2642m) → Alpe d'Huez. Target 88–92% FTP on all climbs. Galibier altitude reduces power ~15% — don't panic, stay in feel. Eat 80–90g carbs/hr from km 0. Negative split each climb."},
+    {day:"Mon Jun 22", name:"OFF",                    type:"REST",     watts:"—",                  detail:"Full rest."},
+    {day:"Tue Jun 23", name:"60min Z2 + openers",     type:"Z2",       watts:`4×1min @${w(118)}W`, detail:"Easy ride, 4×1min openers at end. Priming the system."},
+    {day:"Wed Jun 24", name:"45min Activation",       type:"Threshold",watts:`2×5min @ ${w(95)}W`, detail:"15min WU → 2×5min at 93–97% FTP → 15min CD. Last quality effort before race."},
+    {day:"Thu Jun 25", name:"30min Very easy",        type:"Z1",       watts:`${w(52)}–${w(60)}W`, detail:"Light spin. Shake legs out."},
+    {day:"Fri Jun 26", name:"20min Recon / REST",     type:"Z1",       watts:`${w(52)}–${w(58)}W`, detail:"Optional 20min easy spin on race course, or full rest. Eat 10–12g carbs/kg today. Sleep by 9pm."},
+    {day:"Sat Jun 27", name:"REST — arrive / prep",   type:"REST",     watts:"—",                  detail:"Full rest. Race registration, course recon on foot, gear check. Eat 8–10g carbs/kg. Early bed."},
+    {day:"Sun Jun 28", name:"🏆 MARMOTTE 177km/5000m",type:"Race",     watts:"290–303W on climbs",  detail:"A Priority. Croix de Fer → Télégraphe → Galibier (2642m) → Alpe d'Huez. Target 88–92% FTP on all climbs. Galibier altitude reduces power ~15% — don't panic, stay in feel. Eat 80–90g carbs/hr from km 0. Negative split each climb."},
   ]},
 ];
 
