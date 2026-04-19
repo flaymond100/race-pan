@@ -20,292 +20,94 @@
     --gold-light: #F0C870;
     --border: rgba(26,23,20,0.12);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--cream); color: var(--ink); font-family: 'IBM Plex Sans', sans-serif; font-weight: 300; min-height: 100vh; }
 
-  body {
-    background: var(--cream);
-    color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-  }
+  header { background: var(--ink); color: var(--cream); padding: 2.5rem 2rem 2rem; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,0.015) 40px,rgba(255,255,255,0.015) 41px); }
+  .header-eyebrow { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.6rem; font-weight: 400; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 400; line-height: 1.15; margin-bottom: 0.4rem; }
+  header h1 em { color: var(--terracotta-light); font-style: italic; }
+  .header-sub { font-size: 13px; color: rgba(247,243,237,0.5); font-weight: 300; }
 
-  /* HEADER */
-  header {
-    background: var(--ink);
-    color: var(--cream);
-    padding: 3rem 2rem 2.5rem;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.015) 40px,
-      rgba(255,255,255,0.015) 41px
-    );
-  }
-  .header-eyebrow {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
-  }
-  header h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 400;
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
-  }
-  header h1 em {
-    color: var(--terracotta-light);
-    font-style: italic;
-  }
-  .header-sub {
-    font-size: 13px;
-    color: rgba(247,243,237,0.55);
-    font-weight: 300;
-  }
-
-  /* NAV */
-  nav {
-    background: var(--cream-dark);
-    border-bottom: 1px solid var(--border);
-    padding: 0 1rem;
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+  nav { background: var(--cream-dark); border-bottom: 1px solid var(--border); padding: 0 1rem; display: flex; overflow-x: auto; scrollbar-width: none; position: sticky; top: 0; z-index: 100; }
   nav::-webkit-scrollbar { display: none; }
-  .nav-btn {
-    padding: 1rem 1.25rem 0.85rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink-muted);
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
-    position: relative;
-    top: 1px;
-  }
+  .nav-btn { padding: 1rem 1.1rem 0.85rem; border: none; background: transparent; cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--ink-muted); white-space: nowrap; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; position: relative; top: 1px; }
   .nav-btn:hover { color: var(--ink); }
-  .nav-btn.active {
-    color: var(--terracotta);
-    border-bottom-color: var(--terracotta);
-    font-weight: 500;
-  }
+  .nav-btn.active { color: var(--terracotta); border-bottom-color: var(--terracotta); font-weight: 500; }
 
-  /* MAIN */
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 4rem;
-  }
+  main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-  /* DAY HEADER */
-  .day-header {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .day-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    font-weight: 400;
-  }
-  .day-kcal {
-    font-size: 12px;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-    background: var(--cream-dark);
-    padding: 4px 10px;
-    border-radius: 99px;
-  }
+  .day-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .day-name { font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 400; }
+  .day-kcal { font-size: 12px; color: var(--ink-muted); background: var(--cream-dark); padding: 4px 10px; border-radius: 99px; }
 
-  /* MEAL CARDS */
-  .meals-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .carb-note { background: var(--cream-dark); border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; padding: 0.85rem 1.1rem; font-size: 13px; color: var(--ink-light); line-height: 1.65; margin-bottom: 1.5rem; }
 
-  .meal-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    display: grid;
-    grid-template-columns: 90px 1fr auto;
-    gap: 0 1.5rem;
-    align-items: start;
-    transition: border-color 0.2s;
-  }
-  .meal-card:hover { border-color: rgba(196,98,58,0.3); }
+  /* COOK-ONCE BANNER */
+  .cook-banner { background: var(--basil); color: white; border-radius: 10px; padding: 0.8rem 1.1rem; font-size: 13px; line-height: 1.6; margin-bottom: 1.5rem; display: flex; gap: 10px; align-items: flex-start; }
+  .cook-banner-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
 
-  .slot-label {
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    padding-top: 3px;
-    line-height: 1.4;
-  }
+  .meals-grid { display: flex; flex-direction: column; gap: 10px; }
 
-  .meal-body {}
-  .meal-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 0.35rem;
-    line-height: 1.3;
-  }
-  .meal-desc {
-    font-size: 13px;
-    color: var(--ink-light);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-  .meal-desc .kid-note {
-    color: var(--basil);
-    font-style: italic;
-  }
+  .meal-card { background: white; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; cursor: pointer; }
+  .meal-card:hover { border-color: rgba(196,98,58,0.35); }
+  .meal-card.reuse { border-left: 3px solid var(--basil-light); }
 
-  .macros {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: flex-end;
-    min-width: 80px;
-  }
-  .macro-tag {
-    font-size: 11px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
+  .meal-top { padding: 1.1rem 1.4rem; display: grid; grid-template-columns: 86px 1fr auto; gap: 0 1.2rem; align-items: start; }
+  .slot-label { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); padding-top: 3px; line-height: 1.4; }
+  .meal-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 400; margin-bottom: 0.3rem; line-height: 1.3; }
+  .meal-desc { font-size: 13px; color: var(--ink-light); line-height: 1.55; font-weight: 300; }
+  .meal-desc .kid-note { color: var(--basil); font-style: italic; }
+  .reuse-badge { font-size: 10px; background: #EAF4EE; color: #27500A; padding: 2px 8px; border-radius: 99px; font-weight: 500; white-space: nowrap; margin-top: 5px; display: inline-block; }
+
+  .macros { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; min-width: 72px; }
+  .macro-tag { font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
   .tag-c { background: #EDF4FB; color: #1A5276; }
   .tag-p { background: #EAF4EE; color: #1D5631; }
   .tag-f { background: #FEF5E7; color: #7D5A0A; }
 
-  /* DAY SUMMARY */
-  .day-summary {
-    margin-top: 1.5rem;
-    background: var(--ink);
-    color: var(--cream);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    text-align: center;
-  }
-  .summary-val {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--gold-light);
-  }
-  .summary-lbl {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(247,243,237,0.5);
-    margin-top: 2px;
-  }
+  /* RECIPE PANEL */
+  .recipe-panel { display: none; border-top: 1px solid var(--border); background: #FAFAF7; padding: 1.2rem 1.4rem 1.4rem; }
+  .recipe-panel.open { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  .recipe-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 1.5rem; }
+  .recipe-section-title { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.6rem; font-weight: 500; }
+  .ingredient-list { list-style: none; }
+  .ingredient-list li { font-size: 13px; color: var(--ink-light); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; gap: 10px; }
+  .ingredient-list li:last-child { border-bottom: none; }
+  .ing-name { font-weight: 400; }
+  .ing-qty { color: var(--ink-muted); font-size: 12px; white-space: nowrap; }
+
+  .steps-list { list-style: none; counter-reset: steps; }
+  .steps-list li { font-size: 13px; color: var(--ink-light); line-height: 1.65; padding: 6px 0 6px 2rem; border-bottom: 1px solid var(--border); position: relative; counter-increment: steps; font-weight: 300; }
+  .steps-list li:last-child { border-bottom: none; }
+  .steps-list li::before { content: counter(steps); position: absolute; left: 0; top: 7px; width: 18px; height: 18px; background: var(--terracotta); color: white; border-radius: 50%; font-size: 10px; font-weight: 500; display: flex; align-items: center; justify-content: center; }
+
+  .recipe-tip { margin-top: 1rem; background: rgba(200,146,42,0.1); border-radius: 8px; padding: 0.7rem 1rem; font-size: 12px; color: var(--ink-light); line-height: 1.6; }
+  .recipe-tip strong { font-weight: 500; color: var(--gold); }
+
+  .toggle-arrow { font-size: 13px; color: var(--ink-muted); transition: transform 0.25s; display: inline-block; margin-left: 4px; }
+  .meal-card.expanded .toggle-arrow { transform: rotate(180deg); }
+
+  .day-summary { margin-top: 1.4rem; background: var(--ink); color: var(--cream); border-radius: 12px; padding: 1.1rem 1.4rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+  .summary-val { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 400; color: var(--gold-light); }
+  .summary-lbl { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,243,237,0.45); margin-top: 2px; }
 
   /* SHOPPING */
-  .shop-intro {
-    background: var(--terracotta);
-    color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    font-size: 14px;
-    line-height: 1.6;
-  }
+  .shop-intro { background: var(--terracotta); color: white; border-radius: 12px; padding: 1.4rem; margin-bottom: 1.8rem; font-size: 14px; line-height: 1.6; }
   .shop-intro strong { font-weight: 500; }
+  .shop-section-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; color: var(--ink); margin: 1.6rem 0 0.7rem; display: flex; align-items: center; gap: 0.5rem; }
+  .shop-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .shop-items { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 6px; }
+  .shop-item { font-size: 13px; padding: 7px 12px; background: white; border: 1px solid var(--border); border-radius: 8px; color: var(--ink-light); font-weight: 300; display: flex; align-items: center; gap: 7px; }
+  .shop-item::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--terracotta-light); flex-shrink: 0; }
 
-  .shop-section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin: 1.75rem 0 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .shop-section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  .shop-items {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-    gap: 6px;
-  }
-  .shop-item {
-    font-size: 13px;
-    padding: 7px 12px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--ink-light);
-    font-weight: 300;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .shop-item::before {
-    content: '';
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--terracotta-light);
-    flex-shrink: 0;
-  }
-
-  /* CARB NOTE */
-  .carb-note {
-    background: var(--cream-dark);
-    border-left: 3px solid var(--gold);
-    border-radius: 0 8px 8px 0;
-    padding: 1rem 1.25rem;
-    font-size: 13px;
-    color: var(--ink-light);
-    line-height: 1.7;
-    margin-bottom: 2rem;
-  }
-
-  /* RESPONSIVE */
   @media (max-width: 580px) {
-    .meal-card { grid-template-columns: 1fr; gap: 0.5rem; }
-    .macros { flex-direction: row; align-items: center; }
+    .meal-top { grid-template-columns: 70px 1fr; }
+    .macros { display: none; }
+    .recipe-grid { grid-template-columns: 1fr; }
     .day-summary { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
@@ -315,10 +117,10 @@
 <header>
   <div class="header-eyebrow">Семейный план питания · Итальянская кухня</div>
   <h1>Меню на <em>неделю</em></h1>
-  <div class="header-sub">2 взрослых + ребёнок 4 лет &nbsp;·&nbsp; Углеводы варьируйте сами под нагрузку</div>
+  <div class="header-sub">2 взрослых + ребёнок 4 лет &nbsp;·&nbsp; Нажмите на блюдо, чтобы открыть рецепт</div>
 </header>
 
-<nav id="nav">
+<nav>
   <button class="nav-btn active" onclick="show('mon',this)">Пн</button>
   <button class="nav-btn" onclick="show('tue',this)">Вт</button>
   <button class="nav-btn" onclick="show('wed',this)">Ср</button>
@@ -326,115 +128,580 @@
   <button class="nav-btn" onclick="show('fri',this)">Пт</button>
   <button class="nav-btn" onclick="show('sat',this)">Сб</button>
   <button class="nav-btn" onclick="show('sun',this)">Вс</button>
-  <button class="nav-btn" onclick="show('shop',this)">🛒 Список покупок</button>
+  <button class="nav-btn" onclick="show('shop',this)">🛒 Покупки</button>
 </nav>
 
 <main id="main"></main>
 
 <script>
 const days = {
-  mon: { name: "Понедельник", meals: [
-    { slot: "Завтрак", name: "Ночная овсянка по-тирамису", desc: "Овсяные хлопья на ночь с эспрессо и овсяным молоком, слой маскарпоне-йогурта, какао. <span class='kid-note'>Ребёнку: без кофе, на обычном молоке.</span>", c:72, p:22, f:14, kcal:490 },
-    { slot: "Обед", name: "Pasta e fagioli", desc: "Суп из белой фасоли канеллини и пасты дitalini в томатно-розмариновом бульоне. Хлеб на закваске, оливковое масло.", c:90, p:28, f:12, kcal:580 },
-    { slot: "Перекус", name: "Яблоко + дольки Пармиджано", desc: "Классический итальянский полдник. 30 г сыра на взрослого, половина порции ребёнку.", c:22, p:10, f:8, kcal:190 },
-    { slot: "Ужин", name: "Куриное пайяр на гриле, гремолата, печёный картофель", desc: "Отбитая куриная грудка, соус гремолата (лимон, петрушка, чеснок). Розмариновый картофель, зелёный салат.", c:52, p:48, f:18, kcal:560 }
-  ]},
-  tue: { name: "Вторник", meals: [
-    { slot: "Завтрак", name: "Поленто-каша с ягодным компотом", desc: "Мелкая полента на овсяном молоке, компот из смешанных ягод, ложка рикотты. <span class='kid-note'>Детям нравится яркий цвет.</span>", c:65, p:18, f:10, kcal:420 },
-    { slot: "Обед", name: "Спагетти агlio e olio с тунцом и шпинатом", desc: "Классика: чеснок, оливковое масло, хлопья чили. Тунец из банки, вяленый шпинат. Порцию пасты регулируете сами. <span class='kid-note'>Без чили.</span>", c:95, p:40, f:16, kcal:680 },
-    { slot: "Перекус", name: "Греческий йогурт + мёд + тыквенные семечки", desc: "200 г на взрослого. Восполняет кальций и белок в любое время дня.", c:22, p:20, f:8, kcal:230 },
-    { slot: "Ужин", name: "Минестроне с фарро и тостами с Пармиджано", desc: "Насыщенный овощной суп с полбой (фарро). Грильованный хлеб с сыром.", c:65, p:22, f:14, kcal:470 }
-  ]},
-  wed: { name: "Среда", meals: [
-    { slot: "Завтрак", name: "Тост с рикоттой и инжирным вареньем", desc: "2 ломтика цельнозернового хлеба, рикотта, варенье из инжира. Белок + быстрые углеводы — отличный старт. <span class='kid-note'>1 ломтик детям.</span>", c:52, p:18, f:12, kcal:380 },
-    { slot: "Обед", name: "Панцанелла с креветками на гриле", desc: "Тосканский хлебный салат: чёрствый хлеб, томаты, огурец, базилик, каперсы, красный лук. Сверху — гриль-креветки.", c:58, p:34, f:16, kcal:500 },
-    { slot: "Перекус", name: "Смузи: банан, шпинат, овсяное молоко", desc: "Взрослым можно добавить протеин. <span class='kid-note'>Ребёнку: банан + обычное молоко + горсть овсянки.</span>", c:40, p:18, f:6, kcal:280 },
-    { slot: "Ужин", name: "Ризотто с белыми грибами", desc: "Классика: сушёные белые грибы, рис арборио, Пармиджано, кусочек сливочного масла. Умеренно, но очень сытно.", c:72, p:20, f:16, kcal:510 }
-  ]},
-  thu: { name: "Четверг", meals: [
-    { slot: "Завтрак", name: "Овсяные блинчики с бананом и мёдом", desc: "Тонкие блинчики из овсяной муки, ломтики банана, мёд, ложка маскарпоне. <span class='kid-note'>Любимый завтрак маленьких.</span>", c:78, p:20, f:14, kcal:510 },
-    { slot: "Обед", name: "Ригатони аль рагу с итальянскими сосисками", desc: "Простой и мощный: паста в медленно томлёном томатном соусе с мягкими колбасками. Порцию пасты регулируете сами.", c:105, p:42, f:20, kcal:780 },
-    { slot: "Перекус", name: "Цельнозерновые хлебцы + авокадо + лимон", desc: "Противовоспалительные жиры, клетчатка. Хорошо в любое время дня.", c:26, p:5, f:14, kcal:240 },
-    { slot: "Ужин", name: "Брандзино аль форно (дорадо/сибас) с чечевицей", desc: "Рыба в духовке с травами, лимоном и оливковым маслом. Гарнир — пюре из зелёной чечевицы с чесноком и шалфеем.", c:42, p:50, f:16, kcal:510 }
-  ]},
-  fri: { name: "Пятница", meals: [
-    { slot: "Завтрак", name: "Парфе из йогурта с гранолой и ягодами", desc: "Слои греческого йогурта, овсяной гранолы, замороженных ягод, семян чиа. <span class='kid-note'>Детям — меньше гранолы, больше ягод.</span>", c:62, p:20, f:12, kcal:430 },
-    { slot: "Обед", name: "Риболлита (тосканский хлебный суп)", desc: "Перетушенный минестроне с чёрствым хлебом, белой фасолью и кале. Один из самых питательных супов итальянской кухни.", c:82, p:26, f:14, kcal:550 },
-    { slot: "Перекус", name: "Капрезе на шпажках", desc: "Черри + свежая моцарелла + базилик + оливковое масло. <span class='kid-note'>Любимое у детей — они сами собирают.</span>", c:6, p:14, f:12, kcal:185 },
-    { slot: "Ужин", name: "Домашняя пицца на цельнозерновом тесте", desc: "Взрослым: томат, моцарелла, рукола, прошутто крудо. <span class='kid-note'>Детям: маргарита.</span> Тесто — хороший источник клетчатки.", c:98, p:30, f:20, kcal:670 }
-  ]},
-  sat: { name: "Суббота", meals: [
-    { slot: "Завтрак", name: "Фриттата с полентой и эспрессо", desc: "Поленто-основа + фриттата с овощами и Пармиджано. Плотный, медленно насыщающий завтрак. <span class='kid-note'>Ребёнку — с тёплым молоком.</span>", c:70, p:32, f:18, kcal:570 },
-    { slot: "Обед", name: "Лазанья аль рагу (готовим двойную порцию)", desc: "Флагман недели. Листы свежей яичной пасты, медленный рагу из говядины и свинины, бешамель. Готовьте сразу двойную порцию — хватит на воскресенье.", c:100, p:50, f:28, kcal:840 },
-    { slot: "Перекус", name: "Груша + ломтики Грана Падано + грецкие орехи", desc: "Классический итальянский полдник. Быстро, вкусно, насыщает.", c:26, p:12, f:10, kcal:235 },
-    { slot: "Ужин", name: "Аккуакотта с яйцом-пашот и хлебом", desc: "Тосканский крестьянский суп: томаты, сельдерей, лук, хлеб, яйцо-пашот сверху. Лёгкий вечерний вариант.", c:52, p:22, f:14, kcal:420 }
-  ]},
-  sun: { name: "Воскресенье", meals: [
-    { slot: "Завтрак", name: "Домашние булочки корнетто + капучино", desc: "Медленное, семейное воскресное утро. Взрослым — настоящий капучино. <span class='kid-note'>Ребёнку — горячий шоколад + булочка с вареньем.</span>", c:68, p:14, f:12, kcal:430 },
-    { slot: "Обед", name: "Лазанья (вчерашняя) + зелёный салат", desc: "На следующий день лазанья ещё вкуснее. Простой зелёный салат рядом. Воскресный семейный обед без готовки.", c:95, p:48, f:26, kcal:800 },
-    { slot: "Перекус", name: "Брускетта с томатами и базиликом", desc: "Поджаренный хлеб, спелые томаты, чеснок, базилик, оливковое масло, морская соль.", c:32, p:7, f:10, kcal:240 },
-    { slot: "Ужин", name: "Ньокки из рикотты с маслом и шалфеем", desc: "Ньокки без картофеля — из рикотты. Обжариваются в сливочном масле с шалфеем, Пармиджано. <span class='kid-note'>Дети обожают.</span> Лёгкие, нежные.", c:68, p:24, f:20, kcal:540 }
-  ]}
+  mon: {
+    name: "Понедельник", kcal: 1820,
+    banner: null,
+    meals: [
+      {
+        slot: "Завтрак", name: "Ночная овсянка по-тирамису", reuse: null,
+        desc: "Овсяные хлопья на ночь с эспрессо и овсяным молоком, слой маскарпоне-йогурта, какао. <span class='kid-note'>Ребёнку: без кофе, на обычном молоке.</span>",
+        c:72, p:22, f:14, kcal:490,
+        ingredients: [
+          ["Овсяные хлопья", "80 г / взрослый"],["Овсяное молоко", "200 мл"],["Эспрессо (охлаждённый)", "1 шот"],
+          ["Маскарпоне", "2 ст.л."],["Греческий йогурт", "100 г"],["Какао несладкое", "1 ч.л."],["Мёд", "1 ч.л."]
+        ],
+        steps: [
+          "Вечером смешайте овсянку с овсяным молоком и эспрессо в банке или миске. Накройте и уберите в холодильник на ночь.",
+          "Взбейте маскарпоне с йогуртом и мёдом до однородности.",
+          "Утром выложите маскарпоне-крем поверх овсянки, посыпьте какао через мелкое сито.",
+          "Детская версия: замените эспрессо обычным молоком, мёд по вкусу."
+        ],
+        tip: "Готовьте сразу на 2 дня — во вторник просто освежите слой крема."
+      },
+      {
+        slot: "Обед", name: "Pasta e fagioli", reuse: "готовьте двойную порцию → Пятница: Риболлита",
+        desc: "Суп из белой фасоли канеллини и пасты ditalini в томатно-розмариновом бульоне. Хлеб на закваске, оливковое масло.",
+        c:90, p:28, f:12, kcal:580,
+        ingredients: [
+          ["Дitalini (или другая мелкая паста)", "120 г сухой"],["Фасоль канеллини", "1 банка 400 г"],
+          ["Пассата / рубленые томаты", "300 мл"],["Лук репчатый", "1 шт"],["Морковь", "1 шт"],
+          ["Сельдерей", "2 стебля"],["Чеснок", "3 зубчика"],["Розмарин свежий", "1 веточка"],
+          ["Овощной бульон", "800 мл"],["Оливковое масло", "3 ст.л."],["Пармиджано (для подачи)", "по вкусу"]
+        ],
+        steps: [
+          "Нарежьте лук, морковь и сельдерей мелким кубиком (соффритто). Обжаривайте на оливковом масле 8–10 минут на среднем огне до мягкости.",
+          "Добавьте раздавленный чеснок и розмарин, жарьте ещё 1 минуту.",
+          "Влейте пассату, добавьте фасоль и бульон. Доведите до кипения, варите 15 минут.",
+          "Достаньте половину фасоли, разомните вилкой или пюрируйте блендером — это даст кремовую текстуру супу.",
+          "Всыпьте сухую пасту в суп, варите до готовности (8–10 мин). Суп загустеет.",
+          "Разлейте по тарелкам, щедро полейте оливковым маслом, натрите пармиджано.",
+          "ВАЖНО: отложите половину супа (без пасты!) в контейнер в холодильник → это основа для пятничной Риболлиты."
+        ],
+        tip: "Двойная порция = 2 обеда. В пятницу добавите хлеб, кале и фасоль — получится другой суп."
+      },
+      {
+        slot: "Перекус", name: "Яблоко + дольки Пармиджано", reuse: null,
+        desc: "Классический итальянский полдник. 30 г сыра на взрослого, половина порции ребёнку.",
+        c:22, p:10, f:8, kcal:190,
+        ingredients: [["Яблоко", "1 шт / чел"],["Пармиджано Реджано", "30 г / взрослый, 15 г / ребёнок"]],
+        steps: ["Нарежьте яблоко дольками, сыр — тонкими кусочками. Подавайте вместе. Готово."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Куриное пайяр, гремолата, печёный картофель", reuse: "приготовьте двойную порцию гремолаты — хватит и на четверг к рыбе",
+        desc: "Отбитая куриная грудка на гриле, соус гремолата (лимон, петрушка, чеснок). Розмариновый картофель, зелёный салат.",
+        c:52, p:48, f:18, kcal:560,
+        ingredients: [
+          ["Куриная грудка", "180–200 г / взрослый, 100 г / ребёнок"],["Картофель", "250 г / чел"],
+          ["Петрушка свежая", "1 большой пучок"],["Лимон (цедра + сок)", "1 шт"],["Чеснок", "2 зубчика"],
+          ["Оливковое масло", "4 ст.л."],["Розмарин", "2 веточки"],["Соль, перец", "по вкусу"]
+        ],
+        steps: [
+          "Картофель нарежьте дольками, перемешайте с оливковым маслом, розмарином, солью. Запекайте при 200°C 35–40 минут.",
+          "Куриную грудку накройте плёнкой и отбейте до толщины 1–1.5 см. Посолите, поперчите.",
+          "Гремолата: мелко нарубите петрушку, натрите цедру лимона, выдавите сок, измельчите чеснок. Смешайте с 2 ст.л. оливкового масла.",
+          "Гриль или сковорода-гриль: жарьте курицу по 3–4 минуты с каждой стороны на сильном огне.",
+          "Выложите гремолату на горячую курицу. Рядом — картофель и свежий салат."
+        ],
+        tip: "Гремолата: удвойте порцию и уберите половину в холодильник. В четверг подадите к рыбе."
+      }
+    ]
+  },
+
+  tue: {
+    name: "Вторник", kcal: 1800,
+    banner: { text: "Овсянка по-тирамису из вчера — просто обновите слой маскарпоне-крема. Завтрак без готовки.", icon: "♻️" },
+    meals: [
+      {
+        slot: "Завтрак", name: "Ночная овсянка по-тирамису (вчерашняя)", reuse: "из понедельника",
+        desc: "Та же банка из холодильника — добавьте свежий слой маскарпоне с мёдом и посыпьте какао. <span class='kid-note'>Детская банка тоже готова.</span>",
+        c:70, p:20, f:13, kcal:475,
+        ingredients: [["Готовая овсянка из холодильника", "—"],["Маскарпоне", "1 ст.л. (обновить слой)"],["Какао", "щепотка"]],
+        steps: ["Достаньте банку из холодильника.", "Добавьте свежую ложку маскарпоне с мёдом поверх, посыпьте какао.", "Готово за 2 минуты."],
+        tip: null
+      },
+      {
+        slot: "Обед", name: "Спагетти aglio e olio с тунцом и шпинатом", reuse: null,
+        desc: "Классика: чеснок, оливковое масло, хлопья чили. Тунец из банки, вяленый шпинат. <span class='kid-note'>Без чили — порция для ребёнка в маленькой кастрюле.</span>",
+        c:95, p:40, f:16, kcal:680,
+        ingredients: [
+          ["Спагетти", "140 г / взрослый, 80 г / ребёнок"],["Тунец в оливковом масле", "1 банка 160 г"],
+          ["Шпинат свежий", "100 г"],["Чеснок", "4 зубчика"],["Хлопья чили", "½ ч.л."],
+          ["Оливковое масло", "4 ст.л."],["Петрушка", "небольшой пучок"],["Лимон", "½ шт"],["Соль", "по вкусу"]
+        ],
+        steps: [
+          "Варите спагетти в хорошо подсоленной воде. Сохраните 1 стакан воды от варки перед сливом.",
+          "На большой сковороде на среднем огне разогрейте оливковое масло. Тонко нарежьте чеснок, обжаривайте до золотистого (не сжечь!).",
+          "Добавьте хлопья чили, шпинат — он увянет за 1 минуту.",
+          "Слейте тунец из банки, разломайте крупными кусками в сковороду.",
+          "Выложите спагетти в сковороду, добавьте немного воды от варки, перемешайте. Сок лимона сверху.",
+          "Подавайте сразу. Детская порция — без чили, с меньшим количеством чеснока."
+        ],
+        tip: null
+      },
+      {
+        slot: "Перекус", name: "Греческий йогурт + мёд + тыквенные семечки", reuse: null,
+        desc: "200 г на взрослого. Кальций, белок, магний — хорошо в любое время дня.",
+        c:22, p:20, f:8, kcal:230,
+        ingredients: [["Греческий йогурт (жирный)", "200 г / взрослый, 120 г / ребёнок"],["Мёд", "1 ч.л."],["Тыквенные семечки", "20 г"]],
+        steps: ["Выложите йогурт в миску, полейте мёдом, посыпьте семечками."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Минестроне с фарро", reuse: "готовьте двойную порцию → Пятница: Риболлита (вместе с понедельничным супом)",
+        desc: "Насыщенный овощной суп с полбой (фарро). Грильованный хлеб с тёртым Пармиджано.",
+        c:65, p:22, f:14, kcal:470,
+        ingredients: [
+          ["Фарро (полба)", "80 г сухой"],["Цукини / кабачок", "1 шт"],["Морковь", "1 шт"],
+          ["Сельдерей", "2 стебля"],["Лук", "1 шт"],["Чеснок", "2 зубчика"],["Кале / шпинат", "100 г"],
+          ["Рубленые томаты", "1 банка 400 г"],["Овощной бульон", "1 л"],["Оливковое масло", "3 ст.л."],
+          ["Пармиджано", "для подачи"],["Хлеб закваска", "2 ломтика / чел"]
+        ],
+        steps: [
+          "Нарежьте все овощи кубиком. Обжарьте лук, морковь, сельдерей на оливковом масле 8 минут.",
+          "Добавьте чеснок, цукини, жарьте 3 минуты.",
+          "Влейте томаты и бульон, доведите до кипения. Всыпьте фарро.",
+          "Варите 25–30 минут до мягкости полбы. За 5 минут до конца добавьте кале.",
+          "Хлеб поджарьте, натрите пармиджано. Суп щедро полейте оливковым маслом при подаче.",
+          "ВАЖНО: отложите ½ супа в контейнер → пятничная основа для Риболлиты."
+        ],
+        tip: "Этот суп + суп из понедельника = основа Риболлиты в пятницу. Не выбрасывайте!"
+      }
+    ]
+  },
+
+  wed: {
+    name: "Среда", kcal: 1670,
+    banner: null,
+    meals: [
+      {
+        slot: "Завтрак", name: "Тост с рикоттой и инжирным вареньем", reuse: null,
+        desc: "2 ломтика цельнозернового хлеба, рикотта, варенье из инжира. Быстро, вкусно, насыщает. <span class='kid-note'>1 ломтик детям.</span>",
+        c:52, p:18, f:12, kcal:380,
+        ingredients: [["Хлеб на закваске (цельнозерновой)", "2 ломтика / взрослый"],["Рикотта", "60 г / чел"],["Инжирное варенье", "1–2 ч.л."],["Мёд (по желанию)", "немного"]],
+        steps: ["Поджарьте хлеб в тостере.", "Намажьте рикотту толстым слоем.", "Сверху — ложка инжирного варенья."],
+        tip: null
+      },
+      {
+        slot: "Обед", name: "Панцанелла с креветками на гриле", reuse: null,
+        desc: "Тосканский хлебный салат: чёрствый хлеб, томаты, огурец, базилик, каперсы, красный лук. Сверху — креветки.",
+        c:58, p:34, f:16, kcal:500,
+        ingredients: [
+          ["Чёрствый хлеб на закваске", "150 г"],["Черри-томаты", "250 г"],["Огурец", "1 шт"],
+          ["Красный лук", "½ шт"],["Базилик свежий", "большой пучок"],["Каперсы", "1 ст.л."],
+          ["Креветки (очищенные)", "150 г / взрослый"],["Оливковое масло", "4 ст.л."],
+          ["Красный винный уксус", "2 ст.л."],["Соль, перец", "по вкусу"]
+        ],
+        steps: [
+          "Хлеб нарежьте кубиками, подсушите в духовке при 180°C 10 минут или на сухой сковороде.",
+          "Томаты разрежьте пополам. Огурец нарежьте полукольцами. Лук — тонкими кольцами, промойте холодной водой (убирает горечь).",
+          "Смешайте оливковое масло, уксус, щепотку соли — заправка.",
+          "Смешайте хлеб, томаты, огурец, лук, каперсы, базилик. Полейте заправкой, перемешайте. Дайте постоять 10–15 минут.",
+          "Креветки обжарьте на гриле или сковороде 2 минуты с каждой стороны, посолите.",
+          "Выложите панцанеллу, сверху — горячие креветки."
+        ],
+        tip: "Детская версия: та же панцанелла без лука, меньше уксуса, без каперсов. Несколько креветок."
+      },
+      {
+        slot: "Перекус", name: "Смузи: банан, шпинат, овсяное молоко", reuse: null,
+        desc: "Быстро, питательно. <span class='kid-note'>Ребёнку: банан + обычное молоко + горсть овсянки.</span>",
+        c:40, p:18, f:6, kcal:280,
+        ingredients: [["Банан", "1 шт"],["Шпинат свежий", "горсть"],["Овсяное молоко", "250 мл"],["Протеиновый порошок (необязательно)", "1 мерная ложка"]],
+        steps: ["Всё в блендер, пробить 30 секунд. Готово."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Ризотто с белыми грибами", reuse: null,
+        desc: "Классика: сушёные белые грибы, рис арборио, Пармиджано, кусочек сливочного масла. Умеренно, но очень сытно.",
+        c:72, p:20, f:16, kcal:510,
+        ingredients: [
+          ["Рис арборио", "80 г / взрослый, 50 г / ребёнок"],["Сушёные белые грибы", "30 г"],
+          ["Лук-шалот или репчатый", "1 шт"],["Чеснок", "2 зубчика"],["Белое вино сухое", "100 мл (по желанию)"],
+          ["Горячий овощной бульон", "800 мл"],["Пармиджано", "50 г тёртого"],
+          ["Сливочное масло", "30 г"],["Оливковое масло", "2 ст.л."],["Петрушка", "для подачи"]
+        ],
+        steps: [
+          "Замочите сушёные грибы в 300 мл горячей воды на 20 минут. Грибы достаньте, жидкость процедите и добавьте к бульону.",
+          "В глубокой сковороде обжарьте лук на оливковом масле 5 минут. Добавьте чеснок, грибы — ещё 3 минуты.",
+          "Всыпьте рис, обжаривайте 2 минуты, помешивая — зёрна станут полупрозрачными.",
+          "Влейте вино, мешайте до впитывания. Добавляйте горячий бульон по 1 половнику, постоянно помешивая и дожидаясь впитывания каждой порции. Процесс займёт 18–20 минут.",
+          "Снимите с огня. Вмешайте сливочное масло и тёртый пармиджано — это называется «мантекатура». Ризотто должно медленно растекаться по тарелке.",
+          "Подавайте немедленно. Сверху — петрушка."
+        ],
+        tip: "Ризотто не ждёт. Садитесь за стол до последнего половника бульона."
+      }
+    ]
+  },
+
+  thu: {
+    name: "Четверг", kcal: 2040,
+    banner: { text: "Рагу с ригатони из этого обеда — та же основа, что пойдёт в субботнюю лазанью. Готовьте сразу большой котёл.", icon: "🍳" },
+    meals: [
+      {
+        slot: "Завтрак", name: "Овсяные блинчики с бананом и мёдом", reuse: null,
+        desc: "Тонкие блинчики из овсяной муки, ломтики банана, мёд, ложка маскарпоне. <span class='kid-note'>Любимый завтрак маленьких.</span>",
+        c:78, p:20, f:14, kcal:510,
+        ingredients: [
+          ["Овсяная мука", "100 г"],["Яйца", "2 шт"],["Молоко (овсяное или обычное)", "200 мл"],
+          ["Банан", "2 шт (в тесто + нарезка сверху)"],["Мёд", "2 ст.л."],["Маскарпоне", "2–3 ст.л."],["Сливочное масло", "для сковороды"]
+        ],
+        steps: [
+          "Взбейте яйца с молоком и овсяной мукой до гладкого теста. Добавьте щепотку соли. Дайте постоять 5 минут.",
+          "Разогрейте сковороду с небольшим количеством масла. Лейте тонкий слой теста, жарьте по 1.5 минуты с каждой стороны.",
+          "Подавайте со ломтиками банана, мёдом и маскарпоне. Дети складывают сами."
+        ],
+        tip: null
+      },
+      {
+        slot: "Обед", name: "Ригатони аль рагу с итальянскими сосисками", reuse: "готовьте рагу в двойном объёме → Суббота: основа лазаньи",
+        desc: "Паста в медленно томлёном томатном соусе с мягкими колбасками. Порцию пасты регулируете сами.",
+        c:105, p:42, f:20, kcal:780,
+        ingredients: [
+          ["Ригатони", "140 г / взрослый, 80 г / ребёнок"],["Итальянские сосиски (мягкие)", "400 г"],
+          ["Говяжий + свиной фарш", "600 г (двойная порция)"],["Лук", "2 шт"],["Морковь", "2 шт"],
+          ["Сельдерей", "3 стебля"],["Чеснок", "4 зубчика"],["Пассата", "2 банки 400 г"],
+          ["Красное вино", "150 мл (по желанию)"],["Оливковое масло", "3 ст.л."],["Лавровый лист", "2 шт"],["Тимьян", "несколько веточек"]
+        ],
+        steps: [
+          "Лук, морковь, сельдерей мелко нарежьте. Обжаривайте на оливковом масле 10 минут на среднем огне.",
+          "Вытащите фарш из оболочек сосисок. Добавьте весь фарш (говяжий + свиной + из сосисок) к овощам, жарьте 10–12 минут, разбивая комки.",
+          "Влейте вино, дайте выпариться. Добавьте пассату, чеснок, лавровый лист, тимьян.",
+          "Тушите на слабом огне минимум 1.5 часа (лучше 2). Периодически помешивайте.",
+          "Половину рагу отложите в контейнер → суббота, лазанья. Вторую половину смешайте с горячими ригатони, порция воды от варки.",
+          "Подавайте с тёртым Пармиджано."
+        ],
+        tip: "2 часа томления — ключ к вкусному рагу. Можно в мультиварке на «тушение»."
+      },
+      {
+        slot: "Перекус", name: "Хлебцы + авокадо + лимон", reuse: null,
+        desc: "Противовоспалительные жиры, клетчатка. Хорошо в любое время дня.",
+        c:26, p:5, f:14, kcal:240,
+        ingredients: [["Цельнозерновые хлебцы", "3–4 шт"],["Авокадо", "1 шт на двоих взрослых"],["Лимонный сок", "½ лимона"],["Морская соль, перец", "по вкусу"]],
+        steps: ["Разомните авокадо вилкой, добавьте лимонный сок, соль, перец. Намажьте на хлебцы."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Сибас/дорадо в духовке с чечевицей и гремолатой", reuse: "гремолата из понедельника",
+        desc: "Рыба в духовке с травами, лимоном и оливковым маслом. Чечевица с чесноком и шалфеем. Гремолата из понедельника.",
+        c:42, p:50, f:16, kcal:510,
+        ingredients: [
+          ["Сибас / дорадо", "1 рыба целиком на двоих или порционное филе"],["Зелёная чечевица", "150 г сухой"],
+          ["Чеснок", "3 зубчика"],["Шалфей", "5–6 листьев"],["Лимон", "1 шт"],
+          ["Оливковое масло", "3 ст.л."],["Гремолата из понедельника", "готовая"],["Розмарин", "1 веточка"]
+        ],
+        steps: [
+          "Чечевицу промойте, варите в подсоленной воде 20–25 минут до мягкости. Слейте воду.",
+          "На сковороде обжарьте чеснок с шалфеем в оливковом масле 2 минуты, добавьте чечевицу, перемешайте. Посолите.",
+          "Рыбу натрите солью, перцем, оливковым маслом. Внутрь положите ломтики лимона и розмарин.",
+          "Запекайте при 200°C: целая рыба — 20–25 минут, филе — 12–15 минут.",
+          "Подавайте рыбу на подушке из чечевицы, сверху — ложка гремолаты из понедельника."
+        ],
+        tip: "Гремолата из холодильника отлично дополнит рыбу — её не нужно готовить заново."
+      }
+    ]
+  },
+
+  fri: {
+    name: "Пятница", kcal: 1835,
+    banner: { text: "Риболлита сегодня — это супы из понедельника и вторника. Просто соедините, добавьте хлеб и кале. 15 минут.", icon: "♻️" },
+    meals: [
+      {
+        slot: "Завтрак", name: "Парфе из йогурта с гранолой и ягодами", reuse: null,
+        desc: "Слои греческого йогурта, гранолы, замороженных ягод, семян чиа. <span class='kid-note'>Детям — меньше гранолы, больше ягод.</span>",
+        c:62, p:20, f:12, kcal:430,
+        ingredients: [["Греческий йогурт", "200 г / взрослый"],["Гранола", "40 г"],["Смесь ягод (замороженные)", "100 г"],["Семена чиа", "1 ч.л."],["Мёд", "1 ч.л."]],
+        steps: [
+          "Ягоды разморозьте (или используйте свежие). Можно слегка прогреть на сковороде с мёдом — получится компот.",
+          "Слоями: йогурт → гранола → ягоды → чиа → ещё немного йогурта сверху."
+        ],
+        tip: null
+      },
+      {
+        slot: "Обед", name: "Риболлита (из супов понедельника + вторника)", reuse: "из понедельника + вторника",
+        desc: "Тосканский хлебный суп из остатков минестроне и pasta e fagioli. Кале, белая фасоль, чёрствый хлеб. Один из лучших обедов недели.",
+        c:82, p:26, f:14, kcal:550,
+        ingredients: [
+          ["Остатки супа из пн (pasta e fagioli, без пасты)", "~400 мл"],
+          ["Остатки супа из вт (минестроне)", "~400 мл"],["Кале или савойская капуста", "100 г"],
+          ["Белая фасоль", "½ банки"],["Чёрствый хлеб", "150 г"],
+          ["Чеснок", "2 зубчика"],["Оливковое масло", "3 ст.л."],["Пармиджано", "для подачи"]
+        ],
+        steps: [
+          "Смешайте оба супа в большой кастрюле, поставьте на огонь.",
+          "Нарежьте кале, добавьте в суп вместе с фасолью. Варите 10 минут.",
+          "Нарвите хлеб кусками, добавьте в суп, перемешайте. Он должен полностью впитаться.",
+          "Варите ещё 5 минут, активно помешивая — суп загустеет почти до каши.",
+          "Дайте постоять 10 минут перед подачей. Полейте щедро оливковым маслом, посыпьте пармиджано."
+        ],
+        tip: "Риболлита буквально означает «переваренная». Лучшее блюдо из остатков в итальянской кухне."
+      },
+      {
+        slot: "Перекус", name: "Капрезе на шпажках", reuse: null,
+        desc: "Черри + свежая моцарелла + базилик + оливковое масло. <span class='kid-note'>Дети сами собирают шпажки — вовлеките их.</span>",
+        c:6, p:14, f:12, kcal:185,
+        ingredients: [["Черри-томаты", "200 г"],["Свежая моцарелла (маленькие шарики)", "125 г"],["Базилик", "листья"],["Оливковое масло", "2 ст.л."],["Соль, перец", "по вкусу"]],
+        steps: ["Нанижите на шпажку: томат → базилик → моцарелла → томат. Полейте маслом, посолите."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Домашняя пицца на цельнозерновом тесте", reuse: null,
+        desc: "Взрослым: томат, моцарелла, рукола, прошутто. <span class='kid-note'>Детям: маргарита с кукурузой и оливками.</span>",
+        c:98, p:30, f:20, kcal:670,
+        ingredients: [
+          ["Цельнозерновая мука", "300 г"],["Дрожжи сухие", "7 г"],["Тёплая вода", "200 мл"],
+          ["Оливковое масло", "2 ст.л. + для смазки"],["Соль", "1 ч.л."],
+          ["Пассата", "150 мл"],["Моцарелла", "2 шарика"],["Рукола", "горсть"],
+          ["Прошутто крудо", "4 ломтика"]
+        ],
+        steps: [
+          "ТЕСТО (делайте утром или за 2 часа до ужина): смешайте муку, дрожжи, соль. Добавьте воду и масло, замесите тесто 8–10 минут. Накройте, оставьте подходить 1.5 часа.",
+          "Разогрейте духовку до максимума (250°C), поставьте противень разогреваться внутри.",
+          "Разделите тесто на 2–3 части. Раскатайте тонко на муке.",
+          "Смажьте пассатой (не соусом! именно пассатой — она не пустит сок). Разложите разорванную руками моцареллу.",
+          "Пеките прямо на горячем противне 8–10 минут до золотистого края.",
+          "После духовки — прошутто и рукола сверху (они должны оставаться свежими)."
+        ],
+        tip: "Детскую пиццу (маргарита) достаньте чуть раньше, чтобы моцарелла не пересохла."
+      }
+    ]
+  },
+
+  sat: {
+    name: "Суббота", kcal: 2065,
+    banner: { text: "Рагу из четверга уже готово в холодильнике — лазанья собирается за 20 минут. Готовьте двойную порцию, воскресный обед уже обеспечен.", icon: "🍳" },
+    meals: [
+      {
+        slot: "Завтрак", name: "Фриттата с овощами и полентой", reuse: null,
+        desc: "Поленто-основа + фриттата с овощами и Пармиджано. Плотный завтрак. <span class='kid-note'>Ребёнку с тёплым молоком.</span>",
+        c:70, p:32, f:18, kcal:570,
+        ingredients: [
+          ["Мелкая полента", "60 г / взрослый"],["Молоко / овсяное молоко", "250 мл"],
+          ["Яйца", "3 на двоих"],["Цукини или перец", "1 шт"],["Шпинат", "горсть"],
+          ["Пармиджано тёртый", "3 ст.л."],["Сливочное масло", "20 г"],["Соль, перец", "по вкусу"]
+        ],
+        steps: [
+          "Сварите поленту: влейте молоко в кастрюлю, посолите, доведите до кипения, всыпьте поленту тонкой струйкой помешивая. Варите 5 минут, добавьте масло.",
+          "Взбейте яйца, добавьте тёртый пармиджано, нарезанные овощи, шпинат.",
+          "Вылейте на сковороду с маслом (антипригарная), жарьте на среднем огне 3–4 минуты до схватывания снизу.",
+          "Переставьте сковороду под гриль духовки на 3–4 минуты до золотистой корочки сверху.",
+          "Подавайте фриттату с ложкой горячей поленты."
+        ],
+        tip: null
+      },
+      {
+        slot: "Обед", name: "Лазанья аль рагу (двойная порция)", reuse: "рагу из четверга + делаем двойной объём → Воскресенье: готовый обед",
+        desc: "Флагман недели. Рагу из четверга, листы пасты, бешамель, Пармиджано. Готовьте сразу двойную форму.",
+        c:100, p:50, f:28, kcal:840,
+        ingredients: [
+          ["Рагу из четверга", "готовое (600–700 г)"],["Листы лазаньи", "250 г (без варки)"],
+          ["Молоко", "600 мл"],["Мука", "50 г"],["Сливочное масло", "50 г"],
+          ["Мускатный орех", "щепотка"],["Пармиджано тёртый", "100 г"],["Соль, перец", "по вкусу"]
+        ],
+        steps: [
+          "БЕШАМЕЛЬ: растопите масло в кастрюле, добавьте муку, мешайте 2 минуты на среднем огне. Влейте тёплое молоко тонкой струйкой, постоянно мешая венчиком. Варите 8–10 минут до загустения. Соль, перец, мускатный орех.",
+          "Разогрейте духовку до 180°C.",
+          "В форму для запекания: слой бешамель → листы лазаньи → рагу → бешамель → листы → рагу → бешамель. Финальный слой: бешамель + щедрый слой пармиджано.",
+          "Накройте фольгой, запекайте 30 минут. Снимите фольгу, ещё 15 минут до золотистой корочки.",
+          "Дайте постоять 15 минут перед нарезкой — лазанья «осядет» и не рассыплется."
+        ],
+        tip: "Вторая форма: остудите, накройте плёнкой — в холодильник. Воскресный обед готов."
+      },
+      {
+        slot: "Перекус", name: "Груша + Грана Падано + грецкие орехи", reuse: null,
+        desc: "Классический итальянский полдник. Быстро, насыщает.",
+        c:26, p:12, f:10, kcal:235,
+        ingredients: [["Груша", "1 шт / чел"],["Грана Падано", "30 г / взрослый"],["Грецкие орехи", "20 г / взрослый"]],
+        steps: ["Нарежьте грушу и сыр. Орехи рядом. Кофе по желанию."],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Аккуакотта с яйцом-пашот", reuse: null,
+        desc: "Тосканский крестьянский суп: томаты, сельдерей, лук, хлеб, яйцо-пашот. Лёгкий вечерний вариант после плотного обеда.",
+        c:52, p:22, f:14, kcal:420,
+        ingredients: [
+          ["Томаты крупные или черри", "400 г"],["Сельдерей", "3 стебля"],["Лук", "1 шт"],
+          ["Чеснок", "2 зубчика"],["Яйца", "1 шт / чел"],["Хлеб на закваске", "1 ломтик / чел"],
+          ["Оливковое масло", "3 ст.л."],["Бульон или вода", "500 мл"],
+          ["Пармиджано", "для подачи"],["Тимьян / базилик", "несколько листьев"]
+        ],
+        steps: [
+          "Обжарьте лук, сельдерей, чеснок на оливковом масле 8 минут.",
+          "Добавьте нарезанные томаты, бульон. Варите 15 минут. Посолите.",
+          "Хлеб поджарьте, выложите в глубокие тарелки.",
+          "Яйцо-пашот: в маленькой кастрюле нагрейте воду с уксусом почти до кипения, создайте воронку ложкой, вылейте яйцо в воронку. Варите 3 минуты.",
+          "Вылейте суп в тарелку с хлебом, сверху аккуратно выложите яйцо-пашот."
+        ],
+        tip: null
+      }
+    ]
+  },
+
+  sun: {
+    name: "Воскресенье", kcal: 2010,
+    banner: { text: "Лазанья из вчера — лучший воскресный обед без готовки. Просто разогрейте в духовке при 160°C под фольгой 20 минут.", icon: "♻️" },
+    meals: [
+      {
+        slot: "Завтрак", name: "Домашние булочки корнетто", reuse: null,
+        desc: "Медленное семейное утро. Взрослым — капучино. <span class='kid-note'>Ребёнку — горячий шоколад + булочка с вареньем.</span>",
+        c:68, p:14, f:12, kcal:430,
+        ingredients: [
+          ["Мука пшеничная", "300 г"],["Дрожжи сухие", "7 г"],["Молоко тёплое", "120 мл"],
+          ["Яйцо", "1 шт"],["Сливочное масло мягкое", "60 г"],["Сахар", "30 г"],["Соль", "½ ч.л."],
+          ["Варенье или Нутелла", "для начинки"]
+        ],
+        steps: [
+          "ТЕСТО (делайте вечером в субботу): смешайте муку, дрожжи, сахар, соль. Добавьте молоко, яйцо, масло. Замесите тесто, уберите в холодильник на ночь.",
+          "Утром: достаньте тесто, дайте 30 минут при комнатной температуре.",
+          "Раскатайте в круг, нарежьте на 8 треугольников. На широкий конец — чайная ложка варенья.",
+          "Сворачивайте от широкого конца к узкому, чуть загибая рожки.",
+          "Дайте подойти 30–40 минут под полотенцем.",
+          "Смажьте яйцом (желток + ложка молока). Пеките при 180°C 15–18 минут."
+        ],
+        tip: "Тесто с вечера — и утром минимум хлопот. Дети могут помочь скручивать."
+      },
+      {
+        slot: "Обед", name: "Лазанья (вчерашняя) + зелёный салат", reuse: "из субботы",
+        desc: "На следующий день лазанья ещё вкуснее. Зелёный салат рядом. Воскресный обед без готовки.",
+        c:95, p:48, f:26, kcal:800,
+        ingredients: [["Лазанья из холодильника", "готовая"],["Листовой салат", "100 г"],["Оливковое масло", "2 ст.л."],["Лимонный сок", "1 ч.л."],["Соль", "щепотка"]],
+        steps: [
+          "Разогрейте лазанью в духовке при 160°C, накрыв фольгой, 20 минут.",
+          "Заправьте салат маслом, лимонным соком, солью.",
+          "Налейте вино взрослым, наслаждайтесь."
+        ],
+        tip: null
+      },
+      {
+        slot: "Перекус", name: "Брускетта с томатами и базиликом", reuse: null,
+        desc: "Поджаренный хлеб, спелые томаты, чеснок, базилик, оливковое масло.",
+        c:32, p:7, f:10, kcal:240,
+        ingredients: [["Хлеб на закваске", "2 ломтика / чел"],["Черри-томаты", "150 г"],["Базилик", "листья"],["Чеснок", "1 зубчик"],["Оливковое масло", "2 ст.л."],["Морская соль", "щепотка"]],
+        steps: [
+          "Поджарьте хлеб. Пока горячий — потрите разрезанным зубчиком чеснока.",
+          "Нарежьте томаты пополам, смешайте с базиликом, оливковым маслом, солью.",
+          "Выложите на хлеб. Сразу подавать — через 3 минуты хлеб размокнет."
+        ],
+        tip: null
+      },
+      {
+        slot: "Ужин", name: "Ньокки из рикотты с маслом и шалфеем", reuse: null,
+        desc: "Ньокки из рикотты — без варки, обжариваются на сковороде. Масло, шалфей, Пармиджано. <span class='kid-note'>Дети обожают. Лёгкие и нежные.</span>",
+        c:68, p:24, f:20, kcal:540,
+        ingredients: [
+          ["Рикотта", "250 г"],["Яйцо", "1 шт"],["Мука", "60–80 г (+ для рук)"],
+          ["Пармиджано тёртый", "40 г"],["Соль, мускатный орех", "по вкусу"],
+          ["Сливочное масло", "60 г"],["Шалфей свежий", "8–10 листьев"]
+        ],
+        steps: [
+          "Смешайте рикотту, яйцо, пармиджано, соль, мускатный орех. Добавьте муку — тесто должно быть мягким, чуть липким.",
+          "Влажными руками скатайте овальные ньокки (~3 см). Выложите на присыпанную мукой доску.",
+          "Растопите масло на сковороде, добавьте листья шалфея — жарьте 1–2 минуты до хруста. Шалфей достаньте.",
+          "В то же масло выложите ньокки (партиями), обжаривайте 2–3 минуты с каждой стороны до золотистой корочки.",
+          "Верните шалфей, подавайте с тёртым пармиджано."
+        ],
+        tip: "Ньокки из рикотты мягче картофельных и готовятся в 3 раза быстрее."
+      }
+    ]
+  }
 };
 
 const shopping = [
-  { title: "Паста, крупы и хлеб", icon: "🌾", items: ["Спагетти 1 кг","Дitalini 500 г","Ригатони 1 кг","Фарро (полба) 500 г","Рис арборио 500 г","Мелкая полента 500 г","Овсяные хлопья 1 кг","Цельнозерновой хлеб на закваске","Хлебцы цельнозерновые","Овсяная мука 500 г","Пицца-мука цельнозерновая 1 кг","Листы пасты для лазаньи 500 г"] },
-  { title: "Свежие овощи и фрукты", icon: "🍅", items: ["Черри-томаты 1 кг","Крупные томаты 1 кг","Шпинат свежий 500 г","Кале / савойская капуста 300 г","Сельдерей 1 пучок","Лук репчатый 5–6 шт","Чеснок 2 головки","Розмарин, шалфей, петрушка (свежие)","Базилик (горшок или пучок)","Лимоны 5 шт","Бананы 8–10 шт","Яблоки 4–5 шт","Груши 3–4 шт","Апельсины / мандарины 4 шт","Инжирное варенье (баночка)","Смесь ягод замороженных 500 г","Финики меджул 200 г","Огурцы 2 шт","Красный лук 2 шт","Авокадо 3 шт","Картофель 1 кг"] },
-  { title: "Белок: мясо, рыба, яйца", icon: "🐟", items: ["Куриные грудки 1 кг","Итальянские колбаски (мягкие) 400 г","Говяжий + свиной фарш (рагу) 1,2 кг","Сибас / дорадо 2 рыбы","Тунец в оливковом масле 4 банки","Креветки замороженные 500 г","Яйца 18 шт","Прошутто крудо 100 г"] },
-  { title: "Молочное", icon: "🧀", items: ["Рикотта 500 г","Маскарпоне 250 г","Пармиджано Реджано 300 г","Грана Падано 200 г","Моцарелла свежая 3 шарика","Греческий йогурт 1 кг (жирный)","Сливочное масло 250 г","Овсяное молоко 2 л","Цельное молоко 2 л (детям)","Сливки 200 мл (для бешамель)"] },
-  { title: "Сухой паёк и консервы", icon: "🫙", items: ["Фасоль канеллини 2 банки","Зелёная / пюйская чечевица 400 г","Сушёные белые грибы 30 г","Пассата / рубленые томаты 4 банки","Каперсы 1 банка","Оливковое масло экстра-верджин","Мёд 1 банка","Миндальное масло 1 банка","Тыквенные семечки 150 г","Грецкие орехи 200 г","Миндаль 150 г","Семена чиа 150 г","Гранола 300 г","Какао несладкое","Рисовые хлебцы упаковка"] },
-  { title: "Прочее", icon: "☕", items: ["Кофе эспрессо (зёрна или молотый)","Протеин (ваниль / нейтральный)","Нутелла небольшая банка","Дрожжи сухие (для пиццы и булочек)","Зелёный / листовой салат"] }
+  { title: "Паста, крупы и хлеб", icon: "🌾", items: ["Спагетти 1 кг","Ditalini 500 г","Ригатони 1 кг","Фарро (полба) 500 г","Рис арборио 500 г","Мелкая полента 500 г","Овсяные хлопья 1 кг","Хлеб на закваске (цельнозерновой)","Хлебцы цельнозерновые","Овсяная мука 500 г","Цельнозерновая мука 1 кг (пицца + корнетто)","Листы лазаньи 500 г","Мука пшеничная 500 г"] },
+  { title: "Свежие овощи и фрукты", icon: "🍅", items: ["Черри-томаты 1 кг","Крупные томаты 1 кг","Шпинат свежий 500 г","Кале 300 г","Сельдерей 1 пучок","Лук репчатый 6–8 шт","Чеснок 3 головки","Морковь 5–6 шт","Цукини 2 шт","Розмарин, шалфей, тимьян, петрушка","Базилик горшок","Лимоны 5 шт","Бананы 8–10 шт","Яблоки 4–5 шт","Груши 3–4 шт","Ягоды замороженные 500 г","Огурцы 2 шт","Красный лук 2 шт","Авокадо 3 шт","Картофель 1 кг"] },
+  { title: "Белок: мясо, рыба, яйца", icon: "🐟", items: ["Куриные грудки 1 кг","Итальянские колбаски (мягкие) 400 г","Говяжий + свиной фарш 1,2 кг","Сибас / дорадо 1–2 рыбы","Тунец в оливковом масле 4 банки","Креветки очищенные 500 г","Яйца 18 шт","Прошутто крудо 100 г"] },
+  { title: "Молочное", icon: "🧀", items: ["Рикотта 500 г","Маскарпоне 250 г","Пармиджано Реджано 300 г (кусок)","Грана Падано 200 г","Свежая моцарелла 3 шарика","Греческий йогурт 1 кг (жирный)","Сливочное масло 250 г","Овсяное молоко 2 л","Цельное молоко 2 л","Сливки 200 мл (бешамель)"] },
+  { title: "Консервы и сухое", icon: "🫙", items: ["Фасоль канеллини 3 банки","Зелёная чечевица 400 г","Сушёные белые грибы 30 г","Пассата / рубленые томаты 5 банок","Каперсы 1 банка","Оливковое масло экстра верджин","Мёд","Миндальное масло","Тыквенные семечки 150 г","Грецкие орехи 200 г","Семена чиа 150 г","Гранола 300 г","Инжирное варенье","Какао несладкое","Красный винный уксус"] },
+  { title: "Прочее", icon: "☕", items: ["Кофе эспрессо","Протеиновый порошок","Дрожжи сухие 2 пачки","Мускатный орех молотый","Лавровый лист","Хлопья чили","Горький шоколад (для детского горячего шоколада)","Рисовые хлебцы"] }
 ];
+
+// Cook-once plan summary
+const cookOnce = {
+  mon: null,
+  tue: null,
+  wed: null,
+  thu: "Рагу с ригатони → удвойте объём рагу → суббота: основа лазаньи",
+  fri: "Риболлита = остатки супов понедельника + вторника",
+  sat: "Лазанья → готовьте двойную форму → воскресенье: обед готов",
+  sun: null
+};
+
+function toggleRecipe(card) {
+  const panel = card.querySelector('.recipe-panel');
+  const isOpen = card.classList.contains('expanded');
+  // close all
+  document.querySelectorAll('.meal-card').forEach(c => {
+    c.classList.remove('expanded');
+    c.querySelector('.recipe-panel').classList.remove('open');
+  });
+  if (!isOpen) {
+    card.classList.add('expanded');
+    panel.classList.add('open');
+  }
+}
 
 function renderDay(key) {
   const d = days[key];
   let totalKcal = 0, totalC = 0, totalP = 0, totalF = 0;
   d.meals.forEach(m => { totalKcal += m.kcal; totalC += m.c; totalP += m.p; totalF += m.f; });
 
-  let html = `
-    <div class="carb-note">
-      Углеводы в таблице — <strong>базовые</strong> цифры при стандартной порции пасты/каши. 
-      Увеличивайте или уменьшайте порцию крахмала (паста, рис, хлеб) в зависимости от нагрузки.
-    </div>
-    <div class="day-header">
-      <div class="day-name">${d.name}</div>
-      <span class="day-kcal">~${totalKcal} ккал / взрослый</span>
-    </div>
-    <div class="meals-grid">`;
+  let html = `<div class="carb-note">Углеводы — <strong>базовые</strong> цифры при стандартной порции. Порцию пасты, риса, хлеба регулируйте сами под нагрузку.</div>`;
 
-  d.meals.forEach(m => {
-    html += `
-      <div class="meal-card">
-        <div class="slot-label">${m.slot}</div>
+  if (d.banner) {
+    html += `<div class="cook-banner"><span class="cook-banner-icon">${d.banner.icon}</span><span>${d.banner.text}</span></div>`;
+  }
+
+  html += `<div class="day-header"><div class="day-name">${d.name}</div><span class="day-kcal">~${totalKcal} ккал / взрослый</span></div>`;
+  html += `<div class="meals-grid">`;
+
+  d.meals.forEach((m, i) => {
+    const isReuse = m.reuse !== null;
+    html += `<div class="meal-card${isReuse ? ' reuse' : ''}" onclick="toggleRecipe(this)">
+      <div class="meal-top">
+        <div class="slot-label">${m.slot} <span class="toggle-arrow">▾</span></div>
         <div class="meal-body">
           <div class="meal-name">${m.name}</div>
           <div class="meal-desc">${m.desc}</div>
+          ${m.reuse ? `<span class="reuse-badge">♻ ${m.reuse}</span>` : ''}
         </div>
         <div class="macros">
-          <span class="macro-tag tag-c">У ${m.c} г</span>
-          <span class="macro-tag tag-p">Б ${m.p} г</span>
-          <span class="macro-tag tag-f">Ж ${m.f} г</span>
+          <span class="macro-tag tag-c">У ${m.c}г</span>
+          <span class="macro-tag tag-p">Б ${m.p}г</span>
+          <span class="macro-tag tag-f">Ж ${m.f}г</span>
         </div>
-      </div>`;
+      </div>
+      <div class="recipe-panel">
+        <div class="recipe-grid">
+          <div>
+            <div class="recipe-section-title">Ингредиенты (на семью)</div>
+            <ul class="ingredient-list">
+              ${m.ingredients.map(([n,q]) => `<li><span class="ing-name">${n}</span><span class="ing-qty">${q}</span></li>`).join('')}
+            </ul>
+          </div>
+          <div>
+            <div class="recipe-section-title">Приготовление</div>
+            <ol class="steps-list">
+              ${m.steps.map(s => `<li>${s}</li>`).join('')}
+            </ol>
+            ${m.tip ? `<div class="recipe-tip"><strong>Совет:</strong> ${m.tip}</div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
   });
 
   html += `</div>
     <div class="day-summary">
       <div><div class="summary-val">${totalKcal}</div><div class="summary-lbl">ккал</div></div>
-      <div><div class="summary-val">${totalC} г</div><div class="summary-lbl">углеводы</div></div>
-      <div><div class="summary-val">${totalP} г</div><div class="summary-lbl">белок</div></div>
-      <div><div class="summary-val">${totalF} г</div><div class="summary-lbl">жиры</div></div>
+      <div><div class="summary-val">${totalC}г</div><div class="summary-lbl">углеводы</div></div>
+      <div><div class="summary-val">${totalP}г</div><div class="summary-lbl">белок</div></div>
+      <div><div class="summary-val">${totalF}г</div><div class="summary-lbl">жиры</div></div>
     </div>`;
   return html;
 }
 
 function renderShop() {
-  let html = `
-    <div class="day-header"><div class="day-name">Список покупок</div></div>
+  let html = `<div class="day-header"><div class="day-name">Список покупок</div></div>
     <div class="shop-intro">
       <strong>Закупайтесь сегодня — хватит на всю неделю.</strong><br>
-      Перед походом в магазин проверьте запасы оливкового масла, консервов и сухой пасты. 
-      Бюджет: примерно €100–130 в Rewe или Edeka. Лазанью готовьте двойной порцией в субботу — воскресный обед уже готов.
+      Проверьте запасы оливкового масла, консервов и сухой пасты перед походом. 
+      Бюджет: около €100–130 в Rewe или Edeka. Дрожжи нужны дважды: тесто для пиццы (пятница) и корнетто (суббота вечером → воскресное утро).
     </div>`;
 
   shopping.forEach(s => {
