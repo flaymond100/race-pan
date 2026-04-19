@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Итальянское меню на неделю</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3ED;
+    --cream-dark: #EDE7DB;
+    --ink: #1A1714;
+    --ink-light: #4A4540;
+    --ink-muted: #8A8078;
+    --terracotta: #C4623A;
+    --terracotta-light: #E8896A;
+    --basil: #3D6B4F;
+    --basil-light: #6A9B7E;
+    --gold: #C8922A;
+    --gold-light: #F0C870;
+    --border: rgba(26,23,20,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 41px
+    );
+  }
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.75rem;
+    font-weight: 400;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  header h1 em {
+    color: var(--terracotta-light);
+    font-style: italic;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(247,243,237,0.55);
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    background: var(--cream-dark);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    padding: 1rem 1.25rem 0.85rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-muted);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    position: relative;
+    top: 1px;
+  }
+  .nav-btn:hover { color: var(--ink); }
+  .nav-btn.active {
+    color: var(--terracotta);
+    border-bottom-color: var(--terracotta);
+    font-weight: 500;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* DAY HEADER */
+  .day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .day-kcal {
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    background: var(--cream-dark);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  /* MEAL CARDS */
+  .meals-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .meal-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 0 1.5rem;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+  .meal-card:hover { border-color: rgba(196,98,58,0.3); }
+
+  .slot-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-top: 3px;
+    line-height: 1.4;
+  }
+
+  .meal-body {}
+  .meal-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .meal-desc {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .meal-desc .kid-note {
+    color: var(--basil);
+    font-style: italic;
+  }
+
+  .macros {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-end;
+    min-width: 80px;
+  }
+  .macro-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .tag-c { background: #EDF4FB; color: #1A5276; }
+  .tag-p { background: #EAF4EE; color: #1D5631; }
+  .tag-f { background: #FEF5E7; color: #7D5A0A; }
+
+  /* DAY SUMMARY */
+  .day-summary {
+    margin-top: 1.5rem;
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+  .summary-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--gold-light);
+  }
+  .summary-lbl {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(247,243,237,0.5);
+    margin-top: 2px;
+  }
+
+  /* SHOPPING */
+  .shop-intro {
+    background: var(--terracotta);
+    color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .shop-intro strong { font-weight: 500; }
+
+  .shop-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin: 1.75rem 0 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .shop-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .shop-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+    gap: 6px;
+  }
+  .shop-item {
+    font-size: 13px;
+    padding: 7px 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--ink-light);
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .shop-item::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--terracotta-light);
+    flex-shrink: 0;
+  }
+
+  /* CARB NOTE */
+  .carb-note {
+    background: var(--cream-dark);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 580px) {
+    .meal-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    .macros { flex-direction: row; align-items: center; }
+    .day-summary { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">Семейный план питания · Итальянская кухня</div>
+  <h1>Меню на <em>неделю</em></h1>
+  <div class="header-sub">2 взрослых + ребёнок 4 лет &nbsp;·&nbsp; Углеводы варьируйте сами под нагрузку</div>
+</header>
+
+<nav id="nav">
+  <button class="nav-btn active" onclick="show('mon',this)">Пн</button>
+  <button class="nav-btn" onclick="show('tue',this)">Вт</button>
+  <button class="nav-btn" onclick="show('wed',this)">Ср</button>
+  <button class="nav-btn" onclick="show('thu',this)">Чт</button>
+  <button class="nav-btn" onclick="show('fri',this)">Пт</button>
+  <button class="nav-btn" onclick="show('sat',this)">Сб</button>
+  <button class="nav-btn" onclick="show('sun',this)">Вс</button>
+  <button class="nav-btn" onclick="show('shop',this)">🛒 Список покупок</button>
+</nav>
+
+<main id="main"></main>
+
+<script>
+const days = {
+  mon: { name: "Понедельник", meals: [
+    { slot: "Завтрак", name: "Ночная овсянка по-тирамису", desc: "Овсяные хлопья на ночь с эспрессо и овсяным молоком, слой маскарпоне-йогурта, какао. <span class='kid-note'>Ребёнку: без кофе, на обычном молоке.</span>", c:72, p:22, f:14, kcal:490 },
+    { slot: "Обед", name: "Pasta e fagioli", desc: "Суп из белой фасоли канеллини и пасты дitalini в томатно-розмариновом бульоне. Хлеб на закваске, оливковое масло.", c:90, p:28, f:12, kcal:580 },
+    { slot: "Перекус", name: "Яблоко + дольки Пармиджано", desc: "Классический итальянский полдник. 30 г сыра на взрослого, половина порции ребёнку.", c:22, p:10, f:8, kcal:190 },
+    { slot: "Ужин", name: "Куриное пайяр на гриле, гремолата, печёный картофель", desc: "Отбитая куриная грудка, соус гремолата (лимон, петрушка, чеснок). Розмариновый картофель, зелёный салат.", c:52, p:48, f:18, kcal:560 }
+  ]},
+  tue: { name: "Вторник", meals: [
+    { slot: "Завтрак", name: "Поленто-каша с ягодным компотом", desc: "Мелкая полента на овсяном молоке, компот из смешанных ягод, ложка рикотты. <span class='kid-note'>Детям нравится яркий цвет.</span>", c:65, p:18, f:10, kcal:420 },
+    { slot: "Обед", name: "Спагетти агlio e olio с тунцом и шпинатом", desc: "Классика: чеснок, оливковое масло, хлопья чили. Тунец из банки, вяленый шпинат. Порцию пасты регулируете сами. <span class='kid-note'>Без чили.</span>", c:95, p:40, f:16, kcal:680 },
+    { slot: "Перекус", name: "Греческий йогурт + мёд + тыквенные семечки", desc: "200 г на взрослого. Восполняет кальций и белок в любое время дня.", c:22, p:20, f:8, kcal:230 },
+    { slot: "Ужин", name: "Минестроне с фарро и тостами с Пармиджано", desc: "Насыщенный овощной суп с полбой (фарро). Грильованный хлеб с сыром.", c:65, p:22, f:14, kcal:470 }
+  ]},
+  wed: { name: "Среда", meals: [
+    { slot: "Завтрак", name: "Тост с рикоттой и инжирным вареньем", desc: "2 ломтика цельнозернового хлеба, рикотта, варенье из инжира. Белок + быстрые углеводы — отличный старт. <span class='kid-note'>1 ломтик детям.</span>", c:52, p:18, f:12, kcal:380 },
+    { slot: "Обед", name: "Панцанелла с креветками на гриле", desc: "Тосканский хлебный салат: чёрствый хлеб, томаты, огурец, базилик, каперсы, красный лук. Сверху — гриль-креветки.", c:58, p:34, f:16, kcal:500 },
+    { slot: "Перекус", name: "Смузи: банан, шпинат, овсяное молоко", desc: "Взрослым можно добавить протеин. <span class='kid-note'>Ребёнку: банан + обычное молоко + горсть овсянки.</span>", c:40, p:18, f:6, kcal:280 },
+    { slot: "Ужин", name: "Ризотто с белыми грибами", desc: "Классика: сушёные белые грибы, рис арборио, Пармиджано, кусочек сливочного масла. Умеренно, но очень сытно.", c:72, p:20, f:16, kcal:510 }
+  ]},
+  thu: { name: "Четверг", meals: [
+    { slot: "Завтрак", name: "Овсяные блинчики с бананом и мёдом", desc: "Тонкие блинчики из овсяной муки, ломтики банана, мёд, ложка маскарпоне. <span class='kid-note'>Любимый завтрак маленьких.</span>", c:78, p:20, f:14, kcal:510 },
+    { slot: "Обед", name: "Ригатони аль рагу с итальянскими сосисками", desc: "Простой и мощный: паста в медленно томлёном томатном соусе с мягкими колбасками. Порцию пасты регулируете сами.", c:105, p:42, f:20, kcal:780 },
+    { slot: "Перекус", name: "Цельнозерновые хлебцы + авокадо + лимон", desc: "Противовоспалительные жиры, клетчатка. Хорошо в любое время дня.", c:26, p:5, f:14, kcal:240 },
+    { slot: "Ужин", name: "Брандзино аль форно (дорадо/сибас) с чечевицей", desc: "Рыба в духовке с травами, лимоном и оливковым маслом. Гарнир — пюре из зелёной чечевицы с чесноком и шалфеем.", c:42, p:50, f:16, kcal:510 }
+  ]},
+  fri: { name: "Пятница", meals: [
+    { slot: "Завтрак", name: "Парфе из йогурта с гранолой и ягодами", desc: "Слои греческого йогурта, овсяной гранолы, замороженных ягод, семян чиа. <span class='kid-note'>Детям — меньше гранолы, больше ягод.</span>", c:62, p:20, f:12, kcal:430 },
+    { slot: "Обед", name: "Риболлита (тосканский хлебный суп)", desc: "Перетушенный минестроне с чёрствым хлебом, белой фасолью и кале. Один из самых питательных супов итальянской кухни.", c:82, p:26, f:14, kcal:550 },
+    { slot: "Перекус", name: "Капрезе на шпажках", desc: "Черри + свежая моцарелла + базилик + оливковое масло. <span class='kid-note'>Любимое у детей — они сами собирают.</span>", c:6, p:14, f:12, kcal:185 },
+    { slot: "Ужин", name: "Домашняя пицца на цельнозерновом тесте", desc: "Взрослым: томат, моцарелла, рукола, прошутто крудо. <span class='kid-note'>Детям: маргарита.</span> Тесто — хороший источник клетчатки.", c:98, p:30, f:20, kcal:670 }
+  ]},
+  sat: { name: "Суббота", meals: [
+    { slot: "Завтрак", name: "Фриттата с полентой и эспрессо", desc: "Поленто-основа + фриттата с овощами и Пармиджано. Плотный, медленно насыщающий завтрак. <span class='kid-note'>Ребёнку — с тёплым молоком.</span>", c:70, p:32, f:18, kcal:570 },
+    { slot: "Обед", name: "Лазанья аль рагу (готовим двойную порцию)", desc: "Флагман недели. Листы свежей яичной пасты, медленный рагу из говядины и свинины, бешамель. Готовьте сразу двойную порцию — хватит на воскресенье.", c:100, p:50, f:28, kcal:840 },
+    { slot: "Перекус", name: "Груша + ломтики Грана Падано + грецкие орехи", desc: "Классический итальянский полдник. Быстро, вкусно, насыщает.", c:26, p:12, f:10, kcal:235 },
+    { slot: "Ужин", name: "Аккуакотта с яйцом-пашот и хлебом", desc: "Тосканский крестьянский суп: томаты, сельдерей, лук, хлеб, яйцо-пашот сверху. Лёгкий вечерний вариант.", c:52, p:22, f:14, kcal:420 }
+  ]},
+  sun: { name: "Воскресенье", meals: [
+    { slot: "Завтрак", name: "Домашние булочки корнетто + капучино", desc: "Медленное, семейное воскресное утро. Взрослым — настоящий капучино. <span class='kid-note'>Ребёнку — горячий шоколад + булочка с вареньем.</span>", c:68, p:14, f:12, kcal:430 },
+    { slot: "Обед", name: "Лазанья (вчерашняя) + зелёный салат", desc: "На следующий день лазанья ещё вкуснее. Простой зелёный салат рядом. Воскресный семейный обед без готовки.", c:95, p:48, f:26, kcal:800 },
+    { slot: "Перекус", name: "Брускетта с томатами и базиликом", desc: "Поджаренный хлеб, спелые томаты, чеснок, базилик, оливковое масло, морская соль.", c:32, p:7, f:10, kcal:240 },
+    { slot: "Ужин", name: "Ньокки из рикотты с маслом и шалфеем", desc: "Ньокки без картофеля — из рикотты. Обжариваются в сливочном масле с шалфеем, Пармиджано. <span class='kid-note'>Дети обожают.</span> Лёгкие, нежные.", c:68, p:24, f:20, kcal:540 }
+  ]}
+};
+
+const shopping = [
+  { title: "Паста, крупы и хлеб", icon: "🌾", items: ["Спагетти 1 кг","Дitalini 500 г","Ригатони 1 кг","Фарро (полба) 500 г","Рис арборио 500 г","Мелкая полента 500 г","Овсяные хлопья 1 кг","Цельнозерновой хлеб на закваске","Хлебцы цельнозерновые","Овсяная мука 500 г","Пицца-мука цельнозерновая 1 кг","Листы пасты для лазаньи 500 г"] },
+  { title: "Свежие овощи и фрукты", icon: "🍅", items: ["Черри-томаты 1 кг","Крупные томаты 1 кг","Шпинат свежий 500 г","Кале / савойская капуста 300 г","Сельдерей 1 пучок","Лук репчатый 5–6 шт","Чеснок 2 головки","Розмарин, шалфей, петрушка (свежие)","Базилик (горшок или пучок)","Лимоны 5 шт","Бананы 8–10 шт","Яблоки 4–5 шт","Груши 3–4 шт","Апельсины / мандарины 4 шт","Инжирное варенье (баночка)","Смесь ягод замороженных 500 г","Финики меджул 200 г","Огурцы 2 шт","Красный лук 2 шт","Авокадо 3 шт","Картофель 1 кг"] },
+  { title: "Белок: мясо, рыба, яйца", icon: "🐟", items: ["Куриные грудки 1 кг","Итальянские колбаски (мягкие) 400 г","Говяжий + свиной фарш (рагу) 1,2 кг","Сибас / дорадо 2 рыбы","Тунец в оливковом масле 4 банки","Креветки замороженные 500 г","Яйца 18 шт","Прошутто крудо 100 г"] },
+  { title: "Молочное", icon: "🧀", items: ["Рикотта 500 г","Маскарпоне 250 г","Пармиджано Реджано 300 г","Грана Падано 200 г","Моцарелла свежая 3 шарика","Греческий йогурт 1 кг (жирный)","Сливочное масло 250 г","Овсяное молоко 2 л","Цельное молоко 2 л (детям)","Сливки 200 мл (для бешамель)"] },
+  { title: "Сухой паёк и консервы", icon: "🫙", items: ["Фасоль канеллини 2 банки","Зелёная / пюйская чечевица 400 г","Сушёные белые грибы 30 г","Пассата / рубленые томаты 4 банки","Каперсы 1 банка","Оливковое масло экстра-верджин","Мёд 1 банка","Миндальное масло 1 банка","Тыквенные семечки 150 г","Грецкие орехи 200 г","Миндаль 150 г","Семена чиа 150 г","Гранола 300 г","Какао несладкое","Рисовые хлебцы упаковка"] },
+  { title: "Прочее", icon: "☕", items: ["Кофе эспрессо (зёрна или молотый)","Протеин (ваниль / нейтральный)","Нутелла небольшая банка","Дрожжи сухие (для пиццы и булочек)","Зелёный / листовой салат"] }
+];
+
+function renderDay(key) {
+  const d = days[key];
+  let totalKcal = 0, totalC = 0, totalP = 0, totalF = 0;
+  d.meals.forEach(m => { totalKcal += m.kcal; totalC += m.c; totalP += m.p; totalF += m.f; });
+
+  let html = `
+    <div class="carb-note">
+      Углеводы в таблице — <strong>базовые</strong> цифры при стандартной порции пасты/каши. 
+      Увеличивайте или уменьшайте порцию крахмала (паста, рис, хлеб) в зависимости от нагрузки.
+    </div>
+    <div class="day-header">
+      <div class="day-name">${d.name}</div>
+      <span class="day-kcal">~${totalKcal} ккал / взрослый</span>
+    </div>
+    <div class="meals-grid">`;
+
+  d.meals.forEach(m => {
+    html += `
+      <div class="meal-card">
+        <div class="slot-label">${m.slot}</div>
+        <div class="meal-body">
+          <div class="meal-name">${m.name}</div>
+          <div class="meal-desc">${m.desc}</div>
+        </div>
+        <div class="macros">
+          <span class="macro-tag tag-c">У ${m.c} г</span>
+          <span class="macro-tag tag-p">Б ${m.p} г</span>
+          <span class="macro-tag tag-f">Ж ${m.f} г</span>
+        </div>
+      </div>`;
+  });
+
+  html += `</div>
+    <div class="day-summary">
+      <div><div class="summary-val">${totalKcal}</div><div class="summary-lbl">ккал</div></div>
+      <div><div class="summary-val">${totalC} г</div><div class="summary-lbl">углеводы</div></div>
+      <div><div class="summary-val">${totalP} г</div><div class="summary-lbl">белок</div></div>
+      <div><div class="summary-val">${totalF} г</div><div class="summary-lbl">жиры</div></div>
+    </div>`;
+  return html;
+}
+
+function renderShop() {
+  let html = `
+    <div class="day-header"><div class="day-name">Список покупок</div></div>
+    <div class="shop-intro">
+      <strong>Закупайтесь сегодня — хватит на всю неделю.</strong><br>
+      Перед походом в магазин проверьте запасы оливкового масла, консервов и сухой пасты. 
+      Бюджет: примерно €100–130 в Rewe или Edeka. Лазанью готовьте двойной порцией в субботу — воскресный обед уже готов.
+    </div>`;
+
+  shopping.forEach(s => {
+    html += `<div class="shop-section-title">${s.icon} ${s.title}</div><div class="shop-items">`;
+    s.items.forEach(i => { html += `<div class="shop-item">${i}</div>`; });
+    html += `</div>`;
+  });
+  return html;
+}
+
+function show(key, btn) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('main').innerHTML = key === 'shop' ? renderShop() : renderDay(key);
+}
+
+show('mon', document.querySelector('.nav-btn'));
+</script>
+</body>
+</html>
